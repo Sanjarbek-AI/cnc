@@ -34,7 +34,7 @@ async def comp_menu_def():
     comp_menu = InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                InlineKeyboardButton(text=_("Kanalga a'zo bo'lish ➕"), url="https://t.me/sanjarbek10x"),
+                InlineKeyboardButton(text=_("Kanalga a'zo bo'lish ➕"), url="https://t.me/electromaxgroup"),
             ],
             [
                 InlineKeyboardButton(text=_("Sovg'alar 🎁"), callback_data="user_comp_gifts"),
