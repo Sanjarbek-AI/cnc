@@ -9,6 +9,8 @@ async def get_lang(user_id):
     user = await get_user(user_id)
     if user:
         return user["language"]
+    else:
+        return "uz"
 
 
 class ACLMiddleware(I18nMiddleware):
