@@ -32,6 +32,7 @@ async def start_admin(message: types.Message):
 
 @dp.message_handler(commands="start")
 async def start_users(message: types.Message):
+    print(message)
     args = message.get_args()
     if args:
         user = await get_user(message.from_user.id)
@@ -144,15 +145,15 @@ async def location(call: CallbackQuery, state: FSMContext):
 async def checking(call: CallbackQuery):
     comp = await get_competitions()
     if await get_comp_user(call.from_user.id, comp["id"]):
-        text = "Siz rasm yuborgansiz. ✅"
+        text = _("Siz rasm yuborgansiz. ✅")
     else:
-        text = "Siz rasmni yubormadingiz. ❌"
+        text = _("Siz rasmni yubormadingiz. ❌")
     await call.message.answer(text, reply_markup=await users_main_menu())
 
     for channel in CHANNELS:
         status = await check(call.from_user.id, channel)
         if status:
-            text = "Siz kanalga a'zo bo'lgansiz. ✅"
+            text = _("Siz kanalga a'zo bo'lgansiz. ✅")
         else:
-            text = "Siz kanalga a'zo bo'lmagansiz. ❌"
+            text = _("Siz kanalga a'zo bo'lmagansiz. ❌")
         await call.message.answer(text, reply_markup=await users_main_menu())

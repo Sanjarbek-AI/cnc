@@ -34,16 +34,16 @@ async def comp_menu_def():
     comp_menu = InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                InlineKeyboardButton(text=_("Kanalga a'zo bo'lish ➕"), url="https://t.me/electromaxgroup"),
+                InlineKeyboardButton(text=_("Kanalga a'zo bo'lish ➕"), url="https://t.me/electromaxgroup")
             ],
             [
-                InlineKeyboardButton(text=_("Sovg'alar 🎁"), callback_data="user_comp_gifts"),
+                InlineKeyboardButton(text=_("Sovg'alar 🎁"), callback_data="user_comp_gifts")
             ],
             [
-                InlineKeyboardButton(text=_("Rasmlarni yuborish ⏏"), callback_data="send_comp_post"),
+                InlineKeyboardButton(text=_("Rasmlarni yuborish ⏏"), callback_data="send_comp_post")
             ],
             [
-                InlineKeyboardButton(text=_("Tekshirish ✅"), callback_data="checking"),
+                InlineKeyboardButton(text=_("Tekshirish ✅"), callback_data="checking")
             ]
         ]
     )

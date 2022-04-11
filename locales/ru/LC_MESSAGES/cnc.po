@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-04-10 14:24+0500\n"
+"POT-Creation-Date: 2022-04-11 17:22+0500\n"
 "PO-Revision-Date: 2022-04-04 13:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -105,7 +105,7 @@ msgstr "Конкурс окончен."
 #: handlers/users/admin_showroom.py:162 handlers/users/admin_showroom.py:198
 #: handlers/users/admin_showroom.py:215 handlers/users/admin_showroom.py:251
 #: handlers/users/admin_showroom.py:268 handlers/users/admin_showroom.py:298
-#: handlers/users/send_post.py:56 handlers/users/start.py:138
+#: handlers/users/send_post.py:56 handlers/users/start.py:139
 #: handlers/users/user_menu.py:30 handlers/users/user_menu.py:74
 #: handlers/users/user_menu.py:85 handlers/users/user_menu.py:97
 #: handlers/users/user_menu.py:120 handlers/users/user_profile.py:46
@@ -221,7 +221,8 @@ msgid "Til yangilangi."
 msgstr "Обновление языка."
 
 #: handlers/users/admin_profile.py:79
-msgid "Yangi ism familiyani kiriting."
+#, fuzzy
+msgid "Yangi ism familiyani kiriting"
 msgstr "Введите новое имя и фамилию."
 
 #: handlers/users/admin_profile.py:89
@@ -383,8 +384,8 @@ msgid ""
 "Konkursda ishtirok etish uchun so'rovingiz qabul qilindi. Iltimos kuting,"
 "  tez orada sizga ovoz (❤) yig'ish uchun Havola yuboriladi."
 msgstr ""
-"Ваша заявка на участие в конкурсе принята. Пожалуйста подождите "
-"Скоро вам будет отправлена ссылка для сбора голосов (❤)."
+"Ваша заявка на участие в конкурсе принята. Пожалуйста подождите Скоро вам"
+" будет отправлена ссылка для сбора голосов (❤)."
 
 #: handlers/users/send_comp_post_user.py:73
 msgid "Botda nosozlik yuz berdi"
@@ -395,10 +396,7 @@ msgid ""
 "Siz konkurs ishtirokchisiga aylandingiz. \n"
 "Ko'proq like to'plang va g'olib bo'ling. \n"
 "\n"
-msgstr ""
-"Вы стали участником. \ п "
-"Собери больше лайков и стань победителем"
-"\n"
+msgstr "Вы стали участником. \\ п Собери больше лайков и стань победителем\n"
 
 #: handlers/users/send_comp_post_user.py:114
 msgid "Sizning rasmlaringiz qabul qilinmadi."
@@ -424,21 +422,41 @@ msgstr "Сообщение было отменено."
 msgid "Assalomu alaykum. Siz bot boshqaruvchilaridan birisiz. 😊"
 msgstr "Ассаламу алейкум. Вы один из менеджеров ботов. 😊"
 
-#: handlers/users/start.py:52
+#: handlers/users/start.py:53
 msgid "Siz ro'yxatdan o'tgansiz."
 msgstr "Вы зарегистрированы."
 
-#: handlers/users/start.py:122
+#: handlers/users/start.py:123
 msgid "Siz muvofaqqiyatli ro'yxatdan o'tdingiz."
 msgstr "Вы успешно зарегистрировались."
+
+#: handlers/users/start.py:148
+#, fuzzy
+msgid "Siz rasm yuborgansiz. ✅"
+msgstr "Вы прислали фотографии. ✅"
+
+#: handlers/users/start.py:150
+#, fuzzy
+msgid "Siz rasmni yubormadingiz. ❌"
+msgstr "Вы прислали фотографии. ✅"
+
+#: handlers/users/start.py:156
+#, fuzzy
+msgid "Siz kanalga a'zo bo'lgansiz. ✅"
+msgstr "Подпишитесь на канал первым."
+
+#: handlers/users/start.py:158
+#, fuzzy
+msgid "Siz kanalga a'zo bo'lmagansiz. ❌"
+msgstr "Подпишитесь на канал первым."
 
 #: handlers/users/user_menu.py:54
 msgid ""
 "Hozirda faol konkurslar mavjud emas. Tez orada yangi konkursimizni "
 "boshlaymiz."
 msgstr ""
-"На данный момент активных конкурсов нет. Скоро состоится наш новый конкурс"
-"Давайте начнем"
+"На данный момент активных конкурсов нет. Скоро состоится наш новый "
+"конкурсДавайте начнем"
 
 #: handlers/users/user_menu.py:82 handlers/users/user_menu.py:94
 msgid "Bizning rasmiy diller va do'konlarimiz haqida:"
