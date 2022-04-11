@@ -19,7 +19,9 @@ async def select_language(call: CallbackQuery, state: FSMContext):
     user = await register(call.message, state)
     text = _("🤖 Asosiy menyuga xush kelibsiz.")
     await call.message.answer(text, reply_markup=await admin_main_menu())
+    await state.finish()
 
     if not user:
+        await state.finish()
         text = f""" @cncele_bot \n Xato paydo bo'di. \n Function: 'select_language' admin"""
         await bot.send_message(chat_id="-1001713472813", text=text)

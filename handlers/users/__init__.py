@@ -3,6 +3,7 @@ from . import admin_comp_update
 from . import admin_contact
 from . import admin_profile
 from . import admin_statistics
+from . import select_language
 from . import send_post
 from . import admin_backs
 from . import user_profile
