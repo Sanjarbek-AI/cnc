@@ -1,9 +1,10 @@
-import re
-
-
 async def is_valid(number):
-    if len(number) == 13:
-        pattern = re.compile("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")
-        return pattern.match(number)
+    if len(number) == 12 or len(number) == 9:
+        try:
+            int(number)
+            return True
+        except Exception as exc:
+            print(exc)
+            return False
     else:
         return False
