@@ -8,14 +8,14 @@ from main import config
 
 
 @dp.message_handler(text=['Asosiy menyu ◀', 'Главное меню ◀'], chat_id=config.ADMINS, state="*")
-async def back_admin_main_menu(message: types, state: FSMContext):
+async def back_admin_main_menu(message: types.Message, state: FSMContext):
     await state.finish()
     text = _("Asosiy menyu.")
     await message.answer(text, reply_markup=await admin_main_menu())
 
 
 @dp.message_handler(text=['Asosiy menyu ◀', 'Главное меню ◀'], state="*")
-async def back_admin_main_menu(message: types, state: FSMContext):
+async def back_admin_main_menu(message: types.Message, state: FSMContext):
     await state.finish()
     text = _("Asosiy menyu.")
     await message.answer(text, reply_markup=await users_main_menu())

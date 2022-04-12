@@ -14,7 +14,7 @@ from utils.db_api.update_comp import update_comp_all_status, update_comp_all_pos
 
 
 @dp.message_handler(text=['Конкурс 🎁', 'Konkurs 🎁'], chat_id=config.ADMINS)
-async def select_language(message: types):
+async def select_language(message: types.Message):
     user = await get_user(message.from_user.id)
     competition = await get_competitions()
     if competition and user:
@@ -33,7 +33,7 @@ async def add_competition(call: CallbackQuery):
 
 
 @dp.message_handler(state=AddCompetition.image_uz, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     await state.update_data({
         "image_uz": message.photo[-1].file_id
     })
@@ -43,7 +43,7 @@ async def image_uz(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.image_ru, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def image_ru(message: types, state: FSMContext):
+async def image_ru(message: types.Message, state: FSMContext):
     await state.update_data({
         "image_ru": message.photo[-1].file_id
     })
@@ -53,7 +53,7 @@ async def image_ru(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.conditions_uz, chat_id=config.ADMINS)
-async def conditions_uz(message: types, state: FSMContext):
+async def conditions_uz(message: types.Message, state: FSMContext):
     await state.update_data({
         "conditions_uz": message.text
     })
@@ -63,7 +63,7 @@ async def conditions_uz(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.conditions_ru, chat_id=config.ADMINS)
-async def conditions_ru(message: types, state: FSMContext):
+async def conditions_ru(message: types.Message, state: FSMContext):
     await state.update_data({
         "conditions_ru": message.text
     })
@@ -73,7 +73,7 @@ async def conditions_ru(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.gifts_image_uz, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def gifts_image_uz(message: types, state: FSMContext):
+async def gifts_image_uz(message: types.Message, state: FSMContext):
     await state.update_data({
         "gifts_image_uz": message.photo[-1].file_id
     })
@@ -83,7 +83,7 @@ async def gifts_image_uz(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.gifts_image_ru, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def gifts_image_ru(message: types, state: FSMContext):
+async def gifts_image_ru(message: types.Message, state: FSMContext):
     await state.update_data({
         "gifts_image_ru": message.photo[-1].file_id
     })
@@ -93,7 +93,7 @@ async def gifts_image_ru(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.gifts_uz, chat_id=config.ADMINS)
-async def gifts_uz(message: types, state: FSMContext):
+async def gifts_uz(message: types.Message, state: FSMContext):
     await state.update_data({
         "gifts_uz": message.text
     })
@@ -103,7 +103,7 @@ async def gifts_uz(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=AddCompetition.gifts_ru, chat_id=config.ADMINS)
-async def gifts_ru(message: types, state: FSMContext):
+async def gifts_ru(message: types.Message, state: FSMContext):
     await state.update_data({
         "gifts_ru": message.text
     })

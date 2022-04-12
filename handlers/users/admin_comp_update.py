@@ -41,7 +41,7 @@ async def add_competition(call: CallbackQuery):
 
 
 @dp.message_handler(state=UpdateCompetition.image_ru, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_image_ru(message, message.photo[-1].file_id):
         text = _("Rasm yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
@@ -63,7 +63,7 @@ async def comp_conditions_change(call: CallbackQuery):
 
 
 @dp.message_handler(state=UpdateCompetition.conditions_uz, chat_id=config.ADMINS)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_conditions_uz(message, message.text):
         text = _("Shartlar yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
@@ -85,7 +85,7 @@ async def comp_conditions_change(call: CallbackQuery):
 
 
 @dp.message_handler(state=UpdateCompetition.conditions_ru, chat_id=config.ADMINS)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_conditions_ru(message, message.text):
         text = _("Shartlar yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
@@ -124,7 +124,7 @@ async def change_comp_gifts_image_uz(call: CallbackQuery):
 
 @dp.message_handler(state=UpdateCompetition.gifts_image_uz, chat_id=config.ADMINS,
                     content_types=types.ContentTypes.PHOTO)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_gifts_image_uz(message, message.photo[-1].file_id):
         text = _("Rasm yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
@@ -147,7 +147,7 @@ async def change_comp_gifts_image_uz(call: CallbackQuery):
 
 @dp.message_handler(state=UpdateCompetition.gifts_image_ru, chat_id=config.ADMINS,
                     content_types=types.ContentTypes.PHOTO)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_gifts_image_ru(message, message.photo[-1].file_id):
         text = _("Rasm yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
@@ -169,7 +169,7 @@ async def change_comp_gifts_image_uz(call: CallbackQuery):
 
 
 @dp.message_handler(state=UpdateCompetition.gifts_uz, chat_id=config.ADMINS)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_gifts_uz(message, message.text):
         text = _("Matn yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
@@ -191,7 +191,7 @@ async def change_comp_gifts_image_uz(call: CallbackQuery):
 
 
 @dp.message_handler(state=UpdateCompetition.gifts_ru, chat_id=config.ADMINS)
-async def image_uz(message: types, state: FSMContext):
+async def image_uz(message: types.Message, state: FSMContext):
     if await update_comp_gifts_ru(message, message.text):
         text = _("Matn yangilandi.")
         await message.answer(text, reply_markup=await admin_main_menu())
