@@ -32,7 +32,7 @@ async def get_comp_user(telegram_id, comp_id):
 
 async def get_user_post(post_id):
     try:
-        query = user_post.select().where(user_post.c.id == post_id)
+        query = user_post.select().where(user_post.c.id == post_id, user_post.c.status == True)
         return await database.fetch_one(query=query)
     except Exception as exc:
         print(exc)
@@ -116,7 +116,8 @@ async def update_user_post_status(message, post_id):
 
 async def get_user_active_comp_post(comp_id, tg_id):
     try:
-        query = user_post.select().where(user_post.c.comp_id == comp_id, user_post.c.telegram_id == tg_id)
+        query = user_post.select().where(user_post.c.comp_id == comp_id, user_post.c.telegram_id == tg_id,
+                                         user_post.c.status == True)
         post = await database.fetch_one(query=query)
         return post
     except Exception as exc:

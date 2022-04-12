@@ -53,6 +53,9 @@ async def select_language(message: types):
             else:
                 text = _("Hozirda faol konkurslar mavjud emas. Tez orada yangi konkursimizni boshlaymiz.")
                 await message.answer(text, reply_markup=await users_main_menu())
+    else:
+        text = _("Hozirda faol konkurslar mavjud emas. Tez orada yangi konkursimizni boshlaymiz.")
+        await message.answer(text, reply_markup=await users_main_menu())
 
 
 @dp.message_handler(text=['Aloqa ☎', 'Контакты ☎'])

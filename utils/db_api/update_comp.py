@@ -15,6 +15,18 @@ async def update_comp_all_status(message):
         return False
 
 
+async def update_comp_all_posts(message):
+    try:
+        query = user_post.update().values(
+            status=False,
+            updated_at=message.date
+        ).where(user_post.c.status == True)
+        await database.execute(query=query)
+        return True
+    except Exception as exc:
+        print(exc)
+        return False
+
 
 async def update_comp_image_uz(message, image):
     try:

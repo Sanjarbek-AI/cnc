@@ -32,7 +32,6 @@ async def start_admin(message: types.Message):
 
 @dp.message_handler(commands="start")
 async def start_users(message: types.Message):
-    print(message)
     args = message.get_args()
     if args:
         user = await get_user(message.from_user.id)

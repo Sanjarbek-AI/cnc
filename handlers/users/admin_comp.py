@@ -10,7 +10,7 @@ from loader import dp, _, bot
 from main import config
 from states.admins import AddCompetition
 from utils.db_api.commands import *
-from utils.db_api.update_comp import update_comp_all_status
+from utils.db_api.update_comp import update_comp_all_status, update_comp_all_posts
 
 
 @dp.message_handler(text=['Конкурс 🎁', 'Konkurs 🎁'], chat_id=config.ADMINS)
@@ -146,6 +146,8 @@ async def stop_comp(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     if await update_comp_all_status(call.message):
         text = _("Konkurs yakunlandi.")
+        if await update_comp_all_posts(call.message):
+            pass
     else:
         text = _("Botda nosozlik yuz berdi.")
 
