@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-04-11 17:22+0500\n"
+"POT-Creation-Date: 2022-04-12 15:16+0500\n"
 "PO-Revision-Date: 2022-04-04 13:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uz\n"
@@ -85,7 +85,7 @@ msgstr ""
 msgid "Konkurs yakunlandi."
 msgstr ""
 
-#: handlers/users/admin_comp.py:150 handlers/users/admin_comp_update.py:32
+#: handlers/users/admin_comp.py:152 handlers/users/admin_comp_update.py:32
 #: handlers/users/admin_comp_update.py:54
 #: handlers/users/admin_comp_update.py:76
 #: handlers/users/admin_comp_update.py:98
@@ -102,16 +102,16 @@ msgstr ""
 #: handlers/users/admin_showroom.py:162 handlers/users/admin_showroom.py:198
 #: handlers/users/admin_showroom.py:215 handlers/users/admin_showroom.py:251
 #: handlers/users/admin_showroom.py:268 handlers/users/admin_showroom.py:298
-#: handlers/users/send_post.py:56 handlers/users/start.py:139
-#: handlers/users/user_menu.py:30 handlers/users/user_menu.py:74
-#: handlers/users/user_menu.py:85 handlers/users/user_menu.py:97
-#: handlers/users/user_menu.py:120 handlers/users/user_profile.py:46
+#: handlers/users/send_post.py:56 handlers/users/start.py:138
+#: handlers/users/user_menu.py:30 handlers/users/user_menu.py:77
+#: handlers/users/user_menu.py:88 handlers/users/user_menu.py:100
+#: handlers/users/user_menu.py:123 handlers/users/user_profile.py:46
 #: handlers/users/user_profile.py:78 handlers/users/user_profile.py:109
 #: handlers/users/user_profile.py:141
 msgid "Botda nosozlik yuz berdi."
 msgstr ""
 
-#: handlers/users/admin_comp.py:158
+#: handlers/users/admin_comp.py:160
 msgid "Konkurs to'xtatilmadi."
 msgstr ""
 
@@ -315,11 +315,11 @@ msgstr ""
 msgid "Manzil yangilandi."
 msgstr ""
 
-#: handlers/users/admin_statistics.py:26
+#: handlers/users/admin_statistics.py:27
 msgid "Faol ko'nkurs yo'q"
 msgstr ""
 
-#: handlers/users/admin_statistics.py:68
+#: handlers/users/admin_statistics.py:72
 msgid "Aktiv konkurs mavjud emas."
 msgstr ""
 
@@ -405,37 +405,37 @@ msgstr ""
 msgid "Assalomu alaykum. Siz bot boshqaruvchilaridan birisiz. 😊"
 msgstr ""
 
-#: handlers/users/start.py:53
+#: handlers/users/start.py:52
 msgid "Siz ro'yxatdan o'tgansiz."
 msgstr ""
 
-#: handlers/users/start.py:123
+#: handlers/users/start.py:122
 msgid "Siz muvofaqqiyatli ro'yxatdan o'tdingiz."
 msgstr ""
 
-#: handlers/users/start.py:148
-msgid "Siz rasm yuborgansiz. ✅"
+#: handlers/users/start.py:147
+msgid "Siz rasmni yuborgansiz. ✅"
 msgstr ""
 
-#: handlers/users/start.py:150
-msgid "Siz rasmni yubormadingiz. ❌"
+#: handlers/users/start.py:149
+msgid "Siz rasm yubormadingiz. ❌"
 msgstr ""
 
-#: handlers/users/start.py:156
-msgid "Siz kanalga a'zo bo'lgansiz. ✅"
+#: handlers/users/start.py:155
+msgid "Siz kanalga a'zo bo'lgansiz. ✅ 😊"
 msgstr ""
 
-#: handlers/users/start.py:158
-msgid "Siz kanalga a'zo bo'lmagansiz. ❌"
+#: handlers/users/start.py:157
+msgid "Siz kanalga a'zo bo'lmagansiz. ❌ 😔"
 msgstr ""
 
-#: handlers/users/user_menu.py:54
+#: handlers/users/user_menu.py:54 handlers/users/user_menu.py:57
 msgid ""
 "Hozirda faol konkurslar mavjud emas. Tez orada yangi konkursimizni "
 "boshlaymiz."
 msgstr ""
 
-#: handlers/users/user_menu.py:82 handlers/users/user_menu.py:94
+#: handlers/users/user_menu.py:85 handlers/users/user_menu.py:97
 msgid "Bizning rasmiy diller va do'konlarimiz haqida:"
 msgstr ""
 
@@ -687,5 +687,17 @@ msgid "Xaritada ko'rish 🗺"
 msgstr ""
 
 #~ msgid "Assalomu alaykum."
+#~ msgstr ""
+
+#~ msgid "Siz rasm yuborgansiz. ✅"
+#~ msgstr ""
+
+#~ msgid "Siz rasmni yubormadingiz. ❌"
+#~ msgstr ""
+
+#~ msgid "Siz kanalga a'zo bo'lgansiz. ✅"
+#~ msgstr ""
+
+#~ msgid "Siz kanalga a'zo bo'lmagansiz. ❌"
 #~ msgstr ""
 
