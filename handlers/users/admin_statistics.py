@@ -7,7 +7,8 @@ from keyboards.default.admins import admin_main_menu
 from keyboards.inline.users import export_excel_users
 from loader import dp, _
 from main import config
-from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_users_list
+from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_users_list, \
+    get_user
 from utils.db_api.user_posts import get_all_posts_users
 
 
@@ -58,7 +59,10 @@ async def export_excel(call: CallbackQuery):
         all_users = await get_all_posts_users(comp['id'])
         if all_users:
             users_id_list = [user["telegram_id"] for user in all_users]
-            users = await get_users_list(users_id_list)
+            users = list()
+            for user in users_id_list:
+                user_data = await get_user(user)
+                users.append(user_data)
             excel_file = await export_users_registered(users)
             with open("competition_users.xlsx", "wb") as binary_file:
                 binary_file.write(excel_file)
