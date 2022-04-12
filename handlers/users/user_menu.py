@@ -82,8 +82,12 @@ async def admin_profile(message: types.Message):
 async def select_language(message: types, state: FSMContext):
     showroom_all = await get_showrooms()
     if showroom_all:
+        user = await get_user(message.from_user.id)
         text = _("Bizning rasmiy diller va do'konlarimiz haqida:")
-        await message.answer(text, reply_markup=await showrooms_keyboard_user("uz"))
+        if user:
+            await message.answer(text, reply_markup=await showrooms_keyboard_user(user["language"]))
+        else:
+            await message.answer(text, reply_markup=await showrooms_keyboard_user("uz"))
     else:
         text = _("Botda nosozlik yuz berdi.")
         await message.answer(text, reply_markup=await users_main_menu())

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-04-12 15:16+0500\n"
+"POT-Creation-Date: 2022-04-12 15:47+0500\n"
 "PO-Revision-Date: 2022-04-04 13:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uz\n"
@@ -104,8 +104,8 @@ msgstr ""
 #: handlers/users/admin_showroom.py:268 handlers/users/admin_showroom.py:298
 #: handlers/users/send_post.py:56 handlers/users/start.py:138
 #: handlers/users/user_menu.py:30 handlers/users/user_menu.py:77
-#: handlers/users/user_menu.py:88 handlers/users/user_menu.py:100
-#: handlers/users/user_menu.py:123 handlers/users/user_profile.py:46
+#: handlers/users/user_menu.py:92 handlers/users/user_menu.py:104
+#: handlers/users/user_menu.py:127 handlers/users/user_profile.py:46
 #: handlers/users/user_profile.py:78 handlers/users/user_profile.py:109
 #: handlers/users/user_profile.py:141
 msgid "Botda nosozlik yuz berdi."
@@ -414,19 +414,19 @@ msgid "Siz muvofaqqiyatli ro'yxatdan o'tdingiz."
 msgstr ""
 
 #: handlers/users/start.py:147
-msgid "Siz rasmni yuborgansiz. ✅"
+msgid "Rasm yuborilgan. ✅"
 msgstr ""
 
 #: handlers/users/start.py:149
-msgid "Siz rasm yubormadingiz. ❌"
+msgid "Rasm yuborilmagan. ❌"
 msgstr ""
 
 #: handlers/users/start.py:155
-msgid "Siz kanalga a'zo bo'lgansiz. ✅ 😊"
+msgid "Kanalga a'zo bo'lgansiz. ✅"
 msgstr ""
 
 #: handlers/users/start.py:157
-msgid "Siz kanalga a'zo bo'lmagansiz. ❌ 😔"
+msgid "Kanalga a'zo bo'lmagansiz. ❌"
 msgstr ""
 
 #: handlers/users/user_menu.py:54 handlers/users/user_menu.py:57
@@ -435,7 +435,7 @@ msgid ""
 "boshlaymiz."
 msgstr ""
 
-#: handlers/users/user_menu.py:85 handlers/users/user_menu.py:97
+#: handlers/users/user_menu.py:86 handlers/users/user_menu.py:101
 msgid "Bizning rasmiy diller va do'konlarimiz haqida:"
 msgstr ""
 
@@ -699,5 +699,29 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Siz kanalga a'zo bo'lmagansiz. ❌"
+#~ msgstr ""
+
+#~ msgid "Siz rasmni yuborgansiz. ✅"
+#~ msgstr ""
+
+#~ msgid "Siz rasm yubormadingiz. ❌"
+#~ msgstr ""
+
+#~ msgid "Siz kanalga a'zo bo'lgansiz. ✅ 😊"
+#~ msgstr ""
+
+#~ msgid "Siz kanalga a'zo bo'lmagansiz. ❌ 😔"
+#~ msgstr ""
+
+#~ msgid "Rasm allaqachon yuborilgan. ✅"
+#~ msgstr ""
+
+#~ msgid "Iltimos rasmni yuboring. ❌"
+#~ msgstr ""
+
+#~ msgid "Allaqachon kanalga a'zo bo'lgansiz. ✅ 😊"
+#~ msgstr ""
+
+#~ msgid "Iltimos kanalga a'zo bo'ling. ❌ 😔"
 #~ msgstr ""
 

@@ -143,16 +143,32 @@ async def location(call: CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(text=["checking"])
 async def checking(call: CallbackQuery):
     comp = await get_competitions()
+    user = await get_user(call.from_user.id)
+    lang = ""
+    if user:
+        lang = user["language"]
     if await get_comp_user(call.from_user.id, comp["id"]):
-        text = _("Siz rasmni yuborgansiz. ✅")
+        if lang == "uz":
+            answer = _("Rasm yuborilgan. ✅")
+        else:
+            answer = _("Картинка отправлена. ✅")
     else:
-        text = _("Siz rasm yubormadingiz. ❌")
-    await call.message.answer(text, reply_markup=await users_main_menu())
+        if lang == "uz":
+            answer = _("Rasm yuborilmagan. ❌")
+        else:
+            answer = _("Картинка не отправлена. ❌")
+    await call.message.answer(answer, reply_markup=await users_main_menu())
 
     for channel in CHANNELS:
         status = await check(call.from_user.id, channel)
         if status:
-            text = _("Siz kanalga a'zo bo'lgansiz. ✅ 😊")
+            if lang == "uz":
+                answer = _("Kanalga a'zo bo'lgansiz. ✅")
+            else:
+                answer = _("Вы являетесь участником канала. ✅")
         else:
-            text = _("Siz kanalga a'zo bo'lmagansiz. ❌ 😔")
-        await call.message.answer(text, reply_markup=await users_main_menu())
+            if lang == "uz":
+                answer = _("Kanalga a'zo bo'lmagansiz. ❌")
+            else:
+                answer = _("Вы не являетесь участником канала. ❌")
+        await call.message.answer(answer, reply_markup=await users_main_menu())
