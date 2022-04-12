@@ -80,7 +80,7 @@ async def image_uz(message: types, state: FSMContext):
 async def answer_from_group(call: types.CallbackQuery, callback_data: dict):
     post_id = int(callback_data.get("post_id"))
     post = await get_user_post(post_id)
-    if post["status"]:
+    if post:
         text = "Allaqachon qabul qilingan !!!"
         await bot.send_message(chat_id="-1001538496752", text=text)
     else:
