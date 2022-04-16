@@ -1,6 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandHelp
 
+from filters.private_chat import IsPrivate
 from loader import dp, _
 
 
@@ -15,6 +16,6 @@ async def bot_help(message: types.Message):
     await message.answer(text)
 
 
-@dp.message_handler(state=None)
+@dp.message_handler(IsPrivate(), state=None)
 async def bot_echo(message: types.Message):
     await message.answer(message.text)
