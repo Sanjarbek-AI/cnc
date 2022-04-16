@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 
+from filters.private_chat import IsPrivate
 from keyboards.default.users import users_main_menu
 from keyboards.inline.admin_showroom import showrooms_keyboard_user
 from keyboards.inline.admins import profile_def
@@ -20,7 +21,7 @@ async def return_admin_profile_text(user):
 """
 
 
-@dp.message_handler(text=['Профиль 👤', 'Profil 👤'])
+@dp.message_handler(IsPrivate(), text=['Профиль 👤', 'Profil 👤'])
 async def admin_profile(message: types.Message):
     user = await get_user(message.from_user.id)
     if user:
@@ -31,7 +32,7 @@ async def admin_profile(message: types.Message):
         await message.answer(text, reply_markup=await users_main_menu())
 
 
-@dp.message_handler(text=['Конкурс 🎁', 'Konkurs 🎁'])
+@dp.message_handler(IsPrivate(), text=['Конкурс 🎁', 'Konkurs 🎁'])
 async def select_language(message: types):
     user = await get_user(message.from_user.id)
     competition = await get_competitions()
@@ -58,7 +59,7 @@ async def select_language(message: types):
         await message.answer(text, reply_markup=await users_main_menu())
 
 
-@dp.message_handler(text=['Aloqa ☎', 'Контакты ☎'])
+@dp.message_handler(IsPrivate(), text=['Aloqa ☎', 'Контакты ☎'])
 async def admin_profile(message: types.Message):
     contact = await get_contact()
     user = await get_user(message.from_user.id)
@@ -78,7 +79,7 @@ async def admin_profile(message: types.Message):
         await message.answer(text, reply_markup=await users_main_menu())
 
 
-@dp.message_handler(text=["Do'konlar 🏣", "Магазины 🏣"])
+@dp.message_handler(IsPrivate(), text=["Do'konlar 🏣", "Магазины 🏣"])
 async def select_language(message: types, state: FSMContext):
     showroom_all = await get_showrooms()
     if showroom_all:

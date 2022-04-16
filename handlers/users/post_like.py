@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 
+from filters.private_chat import IsPrivate
 from keyboards.default.users import after_like_menu, users_main_menu
 from keyboards.inline.users import post_like_call, post_like
 from loader import dp, bot, _
@@ -31,7 +32,7 @@ async def showrooms_menu_back(call: CallbackQuery, callback_data: dict, state: F
         await call.message.answer(text, reply_markup=await after_like_menu())
 
 
-@dp.message_handler(text=["Yana ko'rish ⏩", "Увидеть больше ⏩"])
+@dp.message_handler(IsPrivate(), text=["Yana ko'rish ⏩", "Увидеть больше ⏩"])
 async def admin_profile(message: types.Message):
     competition = await get_competitions()
     if competition:
@@ -48,7 +49,7 @@ async def admin_profile(message: types.Message):
         pass
 
 
-@dp.message_handler(text=["Asosiy menyu ⏹"])
+@dp.message_handler(IsPrivate(), text=["Asosiy menyu ⏹"])
 async def admin_profile(message: types.Message):
     text = _("Asosiy menyuga xush kelibsiz.")
     await message.answer(text, reply_markup=await users_main_menu())

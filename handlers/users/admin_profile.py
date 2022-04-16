@@ -3,6 +3,7 @@ from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
+from filters.private_chat import IsPrivate
 from handlers.users.user_menu import return_admin_profile_text
 from keyboards.default.admins import admin_main_menu, back_admin_main_menu, contact_def
 from keyboards.inline.admins import profile_def, profile, languages
@@ -15,7 +16,7 @@ from utils.db_api.user_update import *
 from utils.misc.phone_checker import is_valid
 
 
-@dp.message_handler(text=['Профиль 👤', 'Profil 👤'], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=['Профиль 👤', 'Profil 👤'], chat_id=config.ADMINS)
 async def admin_profile(message: types.Message):
     user = await get_user(message.from_user.id)
     if user:
@@ -26,7 +27,7 @@ async def admin_profile(message: types.Message):
         await message.answer(text, reply_markup=await admin_main_menu())
 
 
-@dp.message_handler(text=['Ortga ◀'], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=['Ortga ◀'], chat_id=config.ADMINS)
 async def back_main_menu(message: types):
     text = _("Asosiy menyu.")
     await message.answer(text, reply_markup=await admin_main_menu())

@@ -3,6 +3,7 @@ from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
+from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, admin_main_menu
 from keyboards.inline.admins import send_post_def
 from loader import dp, _, bot
@@ -11,7 +12,7 @@ from states.admins import SendPost
 from utils.db_api.commands import get_users
 
 
-@dp.message_handler(text=["Post Jo'natish ⏫", "Опубликовать Отправить ⏫"], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=["Post Jo'natish ⏫", "Опубликовать Отправить ⏫"], chat_id=config.ADMINS)
 async def send_post(message: types.Message):
     text = _("Post uchun rasmni kiriting.")
     await message.answer(text, reply_markup=await back_admin_main_menu())

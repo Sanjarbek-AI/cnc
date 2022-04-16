@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.types import InputFile
 from aiogram.types.callback_query import CallbackQuery
 
+from filters.private_chat import IsPrivate
 from handlers.users.excel_users import export_users_registered
 from keyboards.default.admins import admin_main_menu
 from keyboards.inline.users import export_excel_users
@@ -34,7 +35,7 @@ async def return_statistics():
     return text
 
 
-@dp.message_handler(text=['Statistika 📈', 'Статистика 📈'], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=['Statistika 📈', 'Статистика 📈'], chat_id=config.ADMINS)
 async def main_statistics(message: types.Message):
     text = await return_statistics()
     await message.answer(text, reply_markup=await export_excel_users())

@@ -3,6 +3,7 @@ from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
+from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, admin_main_menu
 from keyboards.inline.admin_comp import update_comp_def, comp_yes_or_no
 from keyboards.inline.admins import new_comp_add, new_comp_ask, callback_comp_ask
@@ -13,7 +14,7 @@ from utils.db_api.commands import *
 from utils.db_api.update_comp import update_comp_all_status, update_comp_all_posts
 
 
-@dp.message_handler(text=['Конкурс 🎁', 'Konkurs 🎁'], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=['Конкурс 🎁', 'Konkurs 🎁'], chat_id=config.ADMINS)
 async def select_language(message: types.Message):
     user = await get_user(message.from_user.id)
     competition = await get_competitions()

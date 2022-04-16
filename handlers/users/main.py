@@ -5,7 +5,7 @@ from filters.private_chat import IsPrivate
 from loader import dp, _
 
 
-@dp.message_handler(CommandHelp())
+@dp.message_handler(IsPrivate(), CommandHelp())
 async def bot_help(message: types.Message):
     text = _("""
     Buyruqlar: 

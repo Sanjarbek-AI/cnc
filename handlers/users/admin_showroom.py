@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 
+from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, back_showroom_menu, admin_main_menu
 from keyboards.inline.admin_showroom import *
 from keyboards.inline.users import showroom_menu_user
@@ -12,7 +13,7 @@ from utils.db_api.commands import *
 from utils.db_api.update_showrooms import *
 
 
-@dp.message_handler(text=["Shovrumlar 🏣", "Mагазины 🏣"], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=["Shovrumlar 🏣", "Mагазины 🏣"], chat_id=config.ADMINS)
 async def select_language(message: types):
     showroom_all = await get_showrooms()
     if showroom_all:

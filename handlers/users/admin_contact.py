@@ -3,6 +3,7 @@ from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
+from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, admin_main_menu
 from keyboards.inline.admins import contact_admin_def, add_contact_def
 from loader import dp, _, bot
@@ -12,7 +13,7 @@ from utils.db_api.commands import get_contact, add_contact
 from utils.db_api.update_contact import *
 
 
-@dp.message_handler(text=['Aloqalar ☎'], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=['Aloqalar ☎'], chat_id=config.ADMINS)
 async def admin_profile(message: types.Message):
     contact = await get_contact()
     if contact:
