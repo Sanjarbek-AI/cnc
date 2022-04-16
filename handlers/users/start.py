@@ -3,6 +3,7 @@ from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
+from filters.private_chat import IsPrivate
 from keyboards.default.admins import contact_def, admin_main_menu
 from keyboards.default.users import users_main_menu
 from keyboards.inline.admins import languages
@@ -19,7 +20,7 @@ from utils.misc.checking_user_membership import check
 from utils.misc.phone_checker import is_valid
 
 
-@dp.message_handler(chat_id=config.ADMINS, commands="start")
+@dp.message_handler(IsPrivate(), chat_id=config.ADMINS, commands="start")
 async def start_admin(message: types.Message):
     if await get_user(message.from_user.id):
         text = _("Assalomu alaykum. Siz bot boshqaruvchilaridan birisiz. 😊")
@@ -30,7 +31,7 @@ async def start_admin(message: types.Message):
         await Language.select.set()
 
 
-@dp.message_handler(commands="start")
+@dp.message_handler(IsPrivate(), commands="start")
 async def start_users(message: types.Message):
     args = message.get_args()
     if args:
