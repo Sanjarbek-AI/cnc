@@ -96,17 +96,13 @@ async def get_phone_number(message: types.Message, state: FSMContext):
 
 @dp.message_handler(content_types=types.ContentTypes.CONTACT, state=Register.phone_number)
 async def get_phone_number(message: types.Message, state: FSMContext):
-    if await is_valid(message.contact.phone_number):
-        await state.update_data({
-            "phone_number": message.contact.phone_number
-        })
+    await state.update_data({
+        "phone_number": message.contact.phone_number
+    })
 
-        text = "Asosiy ish hududingizni tanlang."
-        await message.answer(text, reply_markup=await locations_def())
-        await Register.location.set()
-    else:
-        text = "Iltimos telefon raqamingizni tog'ri kiriting !"
-        await message.answer(text)
+    text = "Asosiy ish hududingizni tanlang."
+    await message.answer(text, reply_markup=await locations_def())
+    await Register.location.set()
 
 
 @dp.callback_query_handler(state=Register.location)
