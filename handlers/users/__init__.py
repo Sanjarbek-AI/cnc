@@ -12,5 +12,4 @@ from . import send_comp_post_user
 from . import post_like
 from . import start
 from . import admin_showroom
-from . import main
 from . import user_menu
