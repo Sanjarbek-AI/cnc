@@ -64,21 +64,13 @@ showrooms = sqlalchemy.Table(
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)
 )
 
-competition_user = sqlalchemy.Table(
-    "competition_user",
-    metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("competition_id", sqlalchemy.Integer, nullable=True),
-    sqlalchemy.Column("telegram_id", sqlalchemy.Integer, nullable=True),
-    sqlalchemy.Column("user_code", sqlalchemy.Integer, nullable=True)
-)
 
 posts_and_like = sqlalchemy.Table(
     "posts",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("like", sqlalchemy.Integer, nullable=True),
-    sqlalchemy.Column("telegram_id", sqlalchemy.Integer, nullable=True),
+    sqlalchemy.Column("telegram_id", sqlalchemy.BigInteger, nullable=True),
     sqlalchemy.Column("user_post_id", sqlalchemy.Integer, nullable=True),
 )
 

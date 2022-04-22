@@ -34,11 +34,12 @@ async def admin_profile(message: types.Message):
 
 @dp.message_handler(IsPrivate(), text=['Конкурс 🎁', 'Konkurs 🎁'])
 async def select_language(message: types):
-    user = await get_user(message.from_user.id)
+    user_id = message.from_user.id
+    user = await get_user(user_id)
     competition = await get_competitions()
 
     if competition:
-        post = await get_user_active_comp_post(competition["id"], message.from_user.id)
+        post = await get_user_active_comp_post(user_id, competition["id"])
         print(post)
         if post:
             post_data = await get_user_post(post["id"])

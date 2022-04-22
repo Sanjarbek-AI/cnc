@@ -7,7 +7,7 @@ async def add_posts(message, state):
         data = await state.get_data()
         query = user_post.insert().values(
             comp_id=data.get("comp_id"),
-            telegram_id=123,
+            telegram_id=message.from_user.id,
             images=data.get("images"),
             description=data.get("text"),
             status=False,
@@ -24,7 +24,8 @@ async def add_posts(message, state):
 async def get_comp_user(telegram_id, comp_id):
     try:
         query = user_post.select().where(user_post.c.telegram_id == telegram_id, user_post.c.comp_id == comp_id)
-        return await database.fetch_one(query=query)
+        post = await database.fetch_one(query=query)
+        return post
     except Exception as exc:
         print(exc)
         return False
@@ -114,10 +115,10 @@ async def update_user_post_status(message, post_id):
         return False
 
 
-async def get_user_active_comp_post(comp_id, tg_id):
+async def get_user_active_comp_post(telegram_id, comp_id):
     try:
         query = user_post.select().where(user_post.c.comp_id == comp_id,
-                                         user_post.c.telegram_id == int(tg_id),
+                                         user_post.c.telegram_id == telegram_id,
                                          user_post.c.status == True)
         post = await database.fetch_one(query=query)
         return post

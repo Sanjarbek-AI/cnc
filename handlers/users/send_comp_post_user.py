@@ -56,11 +56,9 @@ async def image_uz(message: types, state: FSMContext):
     comp = await get_competitions()
     await state.update_data({
         "text": message.text,
-        "telegram_id": message.from_user.id,
         "comp_id": comp["id"],
     })
     await add_posts(message, state)
-
     post_data = await get_comp_user(message.from_user.id, comp["id"])
     if post_data:
         await bot.send_photo(
