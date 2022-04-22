@@ -87,7 +87,7 @@ user_post = sqlalchemy.Table(
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("comp_id", sqlalchemy.Integer, nullable=True),
-    sqlalchemy.Column("telegram_id", sqlalchemy.Integer, nullable=True),
+    sqlalchemy.Column("telegram_id", sqlalchemy.BigInteger, nullable=True),
     sqlalchemy.Column("images", sqlalchemy.JSON, nullable=True),
     sqlalchemy.Column("description", sqlalchemy.Text, nullable=True),
     sqlalchemy.Column("status", sqlalchemy.Boolean),

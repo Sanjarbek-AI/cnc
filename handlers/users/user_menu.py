@@ -39,6 +39,7 @@ async def select_language(message: types):
 
     if competition:
         post = await get_user_active_comp_post(competition["id"], message.from_user.id)
+        print(post)
         if post:
             post_data = await get_user_post(post["id"])
             link = f"https://t.me/cncele_bot?start={post['id']}"

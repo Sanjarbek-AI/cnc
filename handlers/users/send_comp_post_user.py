@@ -59,12 +59,13 @@ async def image_uz(message: types, state: FSMContext):
         "telegram_id": message.from_user.id,
         "comp_id": comp["id"],
     })
-    post = await add_posts(message, state)
-    if post:
-        post = await get_comp_user(message.from_user.id, comp["id"])
+    await add_posts(message, state)
+
+    post_data = await get_comp_user(message.from_user.id, comp["id"])
+    if post_data:
         await bot.send_photo(
-            chat_id="-1001538496752", photo=post["images"][0], caption=post["description"],
-            reply_markup=await admin_answer_def(post["id"]))
+            chat_id="-1001538496752", photo=post_data["images"][0], caption=post_data["description"],
+            reply_markup=await admin_answer_def(post_data["id"]))
 
         text = _(
             "Konkursda ishtirok etish uchun so'rovingiz qabul qilindi. Iltimos kuting,  tez orada sizga ovoz (❤)"

@@ -78,7 +78,8 @@ async def register_start(message):
 async def get_competitions():
     try:
         query = competitions.select().where(competitions.c.status == True)
-        return await database.fetch_one(query=query)
+        comp = await database.fetch_one(query=query)
+        return comp
     except Exception as exc:
         print(exc)
         return False

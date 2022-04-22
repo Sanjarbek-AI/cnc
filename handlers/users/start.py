@@ -144,17 +144,6 @@ async def checking(call: CallbackQuery):
     lang = ""
     if user:
         lang = user["language"]
-    if await get_comp_user(call.from_user.id, comp["id"]):
-        if lang == "uz":
-            answer = _("Rasm yuborilgan. ✅")
-        else:
-            answer = _("Картинка отправлена. ✅")
-    else:
-        if lang == "uz":
-            answer = _("Rasm yuborilmagan. ❌")
-        else:
-            answer = _("Картинка не отправлена. ❌")
-    await call.message.answer(answer, reply_markup=await users_main_menu())
 
     for channel in CHANNELS:
         status = await check(call.from_user.id, channel)
@@ -169,3 +158,18 @@ async def checking(call: CallbackQuery):
             else:
                 answer = _("Вы не являетесь участником канала. ❌")
         await call.message.answer(answer, reply_markup=await users_main_menu())
+
+    if await get_comp_user(call.from_user.id, comp["id"]):
+        print("***")
+        if lang == "uz":
+            answer = _("Rasm yuborilgan. ✅")
+        else:
+            answer = _("Картинка отправлена. ✅")
+    else:
+        if lang == "uz":
+            answer = _("Rasm yuborilmagan. ❌")
+        else:
+            answer = _("Картинка не отправлена. ❌")
+    await call.message.answer(answer, reply_markup=await users_main_menu())
+
+

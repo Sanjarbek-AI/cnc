@@ -7,7 +7,7 @@ async def add_posts(message, state):
         data = await state.get_data()
         query = user_post.insert().values(
             comp_id=data.get("comp_id"),
-            telegram_id=data.get("telegram_id"),
+            telegram_id=123,
             images=data.get("images"),
             description=data.get("text"),
             status=False,
@@ -116,7 +116,8 @@ async def update_user_post_status(message, post_id):
 
 async def get_user_active_comp_post(comp_id, tg_id):
     try:
-        query = user_post.select().where(user_post.c.comp_id == comp_id, user_post.c.telegram_id == tg_id,
+        query = user_post.select().where(user_post.c.comp_id == comp_id,
+                                         user_post.c.telegram_id == int(tg_id),
                                          user_post.c.status == True)
         post = await database.fetch_one(query=query)
         return post
