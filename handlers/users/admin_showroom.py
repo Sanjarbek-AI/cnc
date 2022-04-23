@@ -36,6 +36,30 @@ async def admin_showrooms(call: CallbackQuery):
         await call.message.answer(text, reply_markup=await add_dealer_def())
 
 
+@dp.callback_query_handler(text="dealers_uz", chat_id=config.ADMINS)
+async def admin_showrooms(call: CallbackQuery):
+    dealers_all = await get_dealers()
+    if dealers_all:
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        text = _("Dillerlar menyusi.")
+        await call.message.answer(text, reply_markup=await dealers_keyboard("uz"))
+    else:
+        text = _("Hozirda dillerlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan foydalaning.")
+        await call.message.answer(text, reply_markup=await add_dealer_def())
+
+
+@dp.callback_query_handler(text="dealers_ru", chat_id=config.ADMINS)
+async def admin_showrooms(call: CallbackQuery):
+    dealers_all = await get_dealers()
+    if dealers_all:
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        text = _("Dillerlar menyusi.")
+        await call.message.answer(text, reply_markup=await dealers_keyboard("ru"))
+    else:
+        text = _("Hozirda dillerlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan foydalaning.")
+        await call.message.answer(text, reply_markup=await add_dealer_def())
+
+
 @dp.callback_query_handler(text="add_showroom", chat_id=config.ADMINS)
 async def add_showroom_func(call: CallbackQuery):
     text = _("O'zbek tili uchun shovrumning rasmini kiriting.")
