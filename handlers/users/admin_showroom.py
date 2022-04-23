@@ -29,7 +29,7 @@ async def admin_showrooms(call: CallbackQuery):
     dealers_all = await get_dealers()
     if dealers_all:
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-        text = _("Diller menyusi.")
+        text = _("Dillerlar menyusi.")
         await call.message.answer(text, reply_markup=await dealers_keyboard("uz"))
     else:
         text = _("Hozirda dillerlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan foydalaning.")

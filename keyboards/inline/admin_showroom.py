@@ -28,7 +28,7 @@ async def add_dealer_def():
 
 
 async def showrooms_keyboard(lang):
-    markup = InlineKeyboardMarkup(row_width=1)
+    markup = InlineKeyboardMarkup(row_width=2)
 
     showrooms_list = await get_showrooms()
 
@@ -56,7 +56,7 @@ async def showrooms_keyboard(lang):
 
 
 async def dealers_keyboard(lang):
-    markup = InlineKeyboardMarkup(row_width=1)
+    markup = InlineKeyboardMarkup(row_width=2)
 
     dealers_list = await get_dealers()
 
@@ -83,7 +83,7 @@ async def dealers_keyboard(lang):
 
 
 async def user_dealers_keyboard(lang):
-    markup = InlineKeyboardMarkup(row_width=1)
+    markup = InlineKeyboardMarkup(row_width=2)
 
     dealers_list = await get_dealers()
 
@@ -99,7 +99,7 @@ async def user_dealers_keyboard(lang):
 
 
 async def showrooms_keyboard_user(lang):
-    markup = InlineKeyboardMarkup(row_width=1)
+    markup = InlineKeyboardMarkup(row_width=2)
 
     showrooms_list = await get_showrooms()
 
