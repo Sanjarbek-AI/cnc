@@ -14,7 +14,7 @@ from utils.misc.checking_user_membership import check
 
 
 @dp.callback_query_handler(text="send_comp_post")
-async def add_competition(call: CallbackQuery):
+async def send_post(call: CallbackQuery):
     for channel in CHANNELS:
         status = await check(call.from_user.id, channel)
         if status:
@@ -32,7 +32,7 @@ async def add_competition(call: CallbackQuery):
 
 
 @dp.message_handler(state=UserSendPost.images, content_types=types.ContentTypes.PHOTO)
-async def image_uz(message: types, state: FSMContext):
+async def get_images(message: types, state: FSMContext):
     images_list = list()
     try:
         images_list.extend(
@@ -52,7 +52,7 @@ async def image_uz(message: types, state: FSMContext):
 
 
 @dp.message_handler(state=UserSendPost.text)
-async def image_uz(message: types, state: FSMContext):
+async def get_text(message: types, state: FSMContext):
     comp = await get_competitions()
     await state.update_data({
         "text": message.text,
@@ -76,7 +76,7 @@ async def image_uz(message: types, state: FSMContext):
 
 
 @dp.callback_query_handler(callback_admin_answer.filter(act="admin_answer_yes"))
-async def answer_from_group(call: types.CallbackQuery, callback_data: dict):
+async def admin_answer_yes(call: types.CallbackQuery, callback_data: dict):
     post_id = int(callback_data.get("post_id"))
     post = await get_user_post(post_id)
     if post:
@@ -103,7 +103,7 @@ async def answer_from_group(call: types.CallbackQuery, callback_data: dict):
 
 
 @dp.callback_query_handler(callback_admin_answer.filter(act="admin_answer_no"))
-async def answer_from_group(call: types.CallbackQuery, callback_data: dict):
+async def admin_answer_no(callback_data: dict):
     post_id = int(callback_data.get("post_id"))
     post = await get_user_post(post_id)
     if post["status"]:

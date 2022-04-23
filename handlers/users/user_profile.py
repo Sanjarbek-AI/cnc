@@ -128,18 +128,15 @@ async def change_location(call: CallbackQuery, callback_data: dict, state: FSMCo
 async def get_phone_number(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user_id = int(data.get("user_id"))
-    if await is_valid(message.contact.phone_number):
-        if await update_user_phone_number(message, message.contact.phone_number, user_id):
-            await state.finish()
-            text = _("Telefon raqam yangilandi.")
-            await message.answer(text, reply_markup=await users_main_menu())
-            user = await get_user(user_id)
-            text = await return_admin_profile_text(user)
-            await message.answer(text, reply_markup=await profile_def(user['language'], user["telegram_id"]))
-        else:
-            await state.finish()
-            text = _("Botda nosozlik yuz berdi.")
-            await message.answer(text, reply_markup=await users_main_menu())
+    if await update_user_phone_number(message, message.contact.phone_number, user_id):
+        await state.finish()
+        text = _("Telefon raqam yangilandi.")
+        await message.answer(text, reply_markup=await users_main_menu())
+        user = await get_user(user_id)
+        text = await return_admin_profile_text(user)
+        await message.answer(text, reply_markup=await profile_def(user['language'], user["telegram_id"]))
     else:
-        text = "Iltimos telefon raqamingizni tog'ri kiriting !"
-        await message.answer(text)
+        await state.finish()
+        text = _("Botda nosozlik yuz berdi.")
+        await message.answer(text, reply_markup=await users_main_menu())
+

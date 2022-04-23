@@ -7,7 +7,7 @@ async def update_contact_image_uz(message, image):
         query = contacts.update().values(
             image_uz=image,
             updated_at=message.date
-        ).where(contacts.c.status == True)
+        ).where(contacts.c.status == ContactStatus.active)
         await database.execute(query=query)
         return True
     except Exception as exc:
@@ -20,7 +20,7 @@ async def update_contact_image_ru(message, image):
         query = contacts.update().values(
             image_ru=image,
             updated_at=message.date
-        ).where(contacts.c.status == True)
+        ).where(contacts.c.status == ContactStatus.active)
         await database.execute(query=query)
         return True
     except Exception as exc:
@@ -33,7 +33,7 @@ async def update_contact_contact_uz(message, contact):
         query = contacts.update().values(
             contact_uz=contact,
             updated_at=message.date
-        ).where(contacts.c.status == True)
+        ).where(contacts.c.status == ContactStatus.active)
         await database.execute(query=query)
         return True
     except Exception as exc:
@@ -46,7 +46,7 @@ async def update_contact_contact_ru(message, contact):
         query = contacts.update().values(
             contact_ru=contact,
             updated_at=message.date
-        ).where(contacts.c.status == True)
+        ).where(contacts.c.status == ContactStatus.active)
         await database.execute(query=query)
         return True
     except Exception as exc:

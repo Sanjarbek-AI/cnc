@@ -8,7 +8,8 @@ class UserStatus(str, Enum):
 
 class CompetitionStatus(str, Enum):
     active = "active"
-    inactive = "inactive"
+    stopped = "stopped"
+    deleted = "deleted"
 
 
 class ContactStatus(str, Enum):
@@ -16,11 +17,18 @@ class ContactStatus(str, Enum):
     inactive = "inactive"
 
 
-class InformationStatus(str, Enum):
-    active = "active"
-    inactive = "inactive"
-
-
 class ShowroomStatus(str, Enum):
     active = "active"
     inactive = "inactive"
+
+
+class ShowroomType(str, Enum):
+    showroom = "showroom"
+    dealer = "dealer"
+
+
+class UserPostStatus(str, Enum):
+    accepted = "accepted"
+    unaccepted = "unaccepted"
+    disactive = "disactive"
+    deleted = "deleted"

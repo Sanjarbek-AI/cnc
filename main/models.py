@@ -1,6 +1,7 @@
 import sqlalchemy
 from sqlalchemy import DateTime
 
+from main.constants import *
 from main.databases import metadata
 
 users = sqlalchemy.Table(
@@ -12,7 +13,7 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("language", sqlalchemy.String, nullable=True),
     sqlalchemy.Column("telegram_id", sqlalchemy.BigInteger),
     sqlalchemy.Column("phone_number", sqlalchemy.String, nullable=True),
-    sqlalchemy.Column("status", sqlalchemy.Boolean),
+    sqlalchemy.Column("status", sqlalchemy.Enum(UserStatus), nullable=True),
     sqlalchemy.Column('created_at', DateTime(timezone=True), nullable=True),
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)
 )
@@ -30,7 +31,7 @@ competitions = sqlalchemy.Table(
     sqlalchemy.Column("gifts_ru", sqlalchemy.Text, nullable=True),
     sqlalchemy.Column("gifts_image_uz", sqlalchemy.Text, nullable=True),
     sqlalchemy.Column("gifts_image_ru", sqlalchemy.Text, nullable=True),
-    sqlalchemy.Column("status", sqlalchemy.Boolean),
+    sqlalchemy.Column("status", sqlalchemy.Enum(CompetitionStatus), nullable=True),
     sqlalchemy.Column('created_at', DateTime(timezone=True), nullable=True),
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)
 )
@@ -43,7 +44,7 @@ contacts = sqlalchemy.Table(
     sqlalchemy.Column("image_ru", sqlalchemy.String, nullable=True),
     sqlalchemy.Column("contact_uz", sqlalchemy.Text, nullable=True),
     sqlalchemy.Column("contact_ru", sqlalchemy.Text, nullable=True),
-    sqlalchemy.Column("status", sqlalchemy.Boolean),
+    sqlalchemy.Column("status", sqlalchemy.Enum(ContactStatus), nullable=True),
     sqlalchemy.Column('created_at', DateTime(timezone=True), nullable=True),
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)
 )
@@ -59,11 +60,11 @@ showrooms = sqlalchemy.Table(
     sqlalchemy.Column("name_ru", sqlalchemy.Text, nullable=True),
     sqlalchemy.Column("info_ru", sqlalchemy.Text, nullable=True),
     sqlalchemy.Column("location_link", sqlalchemy.Text, nullable=True),
-    sqlalchemy.Column("status", sqlalchemy.Boolean),
+    sqlalchemy.Column("status", sqlalchemy.Enum(ShowroomStatus), nullable=True),
+    sqlalchemy.Column("type", sqlalchemy.Enum(ShowroomType), nullable=True),
     sqlalchemy.Column('created_at', DateTime(timezone=True), nullable=True),
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)
 )
-
 
 posts_and_like = sqlalchemy.Table(
     "posts",
@@ -79,10 +80,10 @@ user_post = sqlalchemy.Table(
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("comp_id", sqlalchemy.Integer, nullable=True),
-    sqlalchemy.Column("telegram_id", sqlalchemy.BigInteger, nullable=True),
+    sqlalchemy.Column("telegram_id", sqlalchemy.BIGINT, nullable=True),
     sqlalchemy.Column("images", sqlalchemy.JSON, nullable=True),
     sqlalchemy.Column("description", sqlalchemy.Text, nullable=True),
-    sqlalchemy.Column("status", sqlalchemy.Boolean),
+    sqlalchemy.Column("status", sqlalchemy.Enum(UserPostStatus), nullable=True),
     sqlalchemy.Column('created_at', DateTime(timezone=True), nullable=True),
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)
 )

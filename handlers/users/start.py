@@ -160,7 +160,6 @@ async def checking(call: CallbackQuery):
         await call.message.answer(answer, reply_markup=await users_main_menu())
 
     if await get_comp_user(call.from_user.id, comp["id"]):
-        print("***")
         if lang == "uz":
             answer = _("Rasm yuborilgan. ✅")
         else:

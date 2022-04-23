@@ -22,7 +22,7 @@ async def return_admin_profile_text(user):
 
 
 @dp.message_handler(IsPrivate(), text=['Профиль 👤', 'Profil 👤'])
-async def admin_profile(message: types.Message):
+async def profile(message: types.Message):
     user = await get_user(message.from_user.id)
     if user:
         text = await return_admin_profile_text(user)
@@ -33,14 +33,13 @@ async def admin_profile(message: types.Message):
 
 
 @dp.message_handler(IsPrivate(), text=['Конкурс 🎁', 'Konkurs 🎁'])
-async def select_language(message: types):
+async def get_competition(message: types):
     user_id = message.from_user.id
     user = await get_user(user_id)
     competition = await get_competitions()
 
     if competition:
         post = await get_user_active_comp_post(user_id, competition["id"])
-        print(post)
         if post:
             post_data = await get_user_post(post["id"])
             link = f"https://t.me/cncele_bot?start={post['id']}"
@@ -82,7 +81,7 @@ async def admin_profile(message: types.Message):
 
 
 @dp.message_handler(IsPrivate(), text=["Do'konlar 🏣", "Магазины 🏣"])
-async def select_language(message: types, state: FSMContext):
+async def get_user_showrooms(message: types):
     showroom_all = await get_showrooms()
     if showroom_all:
         user = await get_user(message.from_user.id)
@@ -97,7 +96,7 @@ async def select_language(message: types, state: FSMContext):
 
 
 @dp.callback_query_handler(text="back_user_showroom_menu")
-async def showroom_get(call: CallbackQuery):
+async def back_user_showroom_menu(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     showroom_all = await get_showrooms()
     if showroom_all:
@@ -109,7 +108,7 @@ async def showroom_get(call: CallbackQuery):
 
 
 @dp.callback_query_handler(text="user_comp_gifts")
-async def showroom_get(call: CallbackQuery):
+async def user_comp_gifts(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     competition = await get_competitions()
     user = await get_user(call.from_user.id)
@@ -132,7 +131,7 @@ async def showroom_get(call: CallbackQuery):
 
 
 @dp.callback_query_handler(text="user_back_comp_menu")
-async def back_user(call: CallbackQuery):
+async def user_back_comp_menu(call: CallbackQuery):
     try:
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         user = await get_user(call.from_user.id)

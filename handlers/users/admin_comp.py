@@ -39,7 +39,7 @@ async def image_uz(message: types.Message, state: FSMContext):
         "image_uz": message.photo[-1].file_id
     })
     text = _("Rus tili uchun konkursni rasmini yuboring.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.image_ru.set()
 
 
@@ -49,7 +49,7 @@ async def image_ru(message: types.Message, state: FSMContext):
         "image_ru": message.photo[-1].file_id
     })
     text = _("O'zbek tili uchun konkurs shartlarini yuboring.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.conditions_uz.set()
 
 
@@ -59,7 +59,7 @@ async def conditions_uz(message: types.Message, state: FSMContext):
         "conditions_uz": message.text
     })
     text = _("Rus tili uchun konkurs shartlarini yuboring.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.conditions_ru.set()
 
 
@@ -69,7 +69,7 @@ async def conditions_ru(message: types.Message, state: FSMContext):
         "conditions_ru": message.text
     })
     text = _("O'zbek tili uchun sovg'alarni rasmini jo'nating.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.gifts_image_uz.set()
 
 
@@ -79,7 +79,7 @@ async def gifts_image_uz(message: types.Message, state: FSMContext):
         "gifts_image_uz": message.photo[-1].file_id
     })
     text = _("Rus tili uchun sovg'alarni rasmini jo'nating.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.gifts_image_ru.set()
 
 
@@ -89,7 +89,7 @@ async def gifts_image_ru(message: types.Message, state: FSMContext):
         "gifts_image_ru": message.photo[-1].file_id
     })
     text = _("O'zbek tili uchun sovg'alarni matnini yuboring.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.gifts_uz.set()
 
 
@@ -99,7 +99,7 @@ async def gifts_uz(message: types.Message, state: FSMContext):
         "gifts_uz": message.text
     })
     text = _("Rus tili uchun sovg'alarni matnini yuboring.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(text, reply_markup=await back_admin_main_menu())
     await AddCompetition.gifts_ru.set()
 
 

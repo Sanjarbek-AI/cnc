@@ -27,7 +27,7 @@ async def admin_profile(message: types.Message):
 
 
 @dp.callback_query_handler(text="contact_uz", chat_id=config.ADMINS)
-async def change_language(call: CallbackQuery):
+async def contact_uz(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     contact = await get_contact()
     await call.message.answer_photo(
@@ -37,7 +37,7 @@ async def change_language(call: CallbackQuery):
 
 
 @dp.callback_query_handler(text="contact_ru", chat_id=config.ADMINS)
-async def change_language(call: CallbackQuery):
+async def contact_ru(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     contact = await get_contact()
     await call.message.answer_photo(
@@ -47,7 +47,7 @@ async def change_language(call: CallbackQuery):
 
 
 @dp.callback_query_handler(text="add_contact", chat_id=config.ADMINS)
-async def change_language(call: CallbackQuery):
+async def add_contact_(call: CallbackQuery):
     text = _("O'zbek tili uchun kontank rasmini kiriting.")
     await call.message.answer(text, reply_markup=await back_admin_main_menu())
     await AddContact.image_uz.set()
@@ -65,7 +65,7 @@ async def contact_image_uz(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddContact.image_ru, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def contact_image_uz(message: types.Message, state: FSMContext):
+async def contact_image_ru(message: types.Message, state: FSMContext):
     await state.update_data({
         "image_ru": message.photo[-1].file_id
     })
@@ -76,7 +76,7 @@ async def contact_image_uz(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddContact.contact_uz, chat_id=config.ADMINS)
-async def contact_image_uz(message: types.Message, state: FSMContext):
+async def contact_text_uz(message: types.Message, state: FSMContext):
     await state.update_data({
         "contact_uz": message.text
     })
@@ -87,7 +87,7 @@ async def contact_image_uz(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddContact.contact_ru, chat_id=config.ADMINS)
-async def contact_image_uz(message: types.Message, state: FSMContext):
+async def contact_text_ru(message: types.Message, state: FSMContext):
     await state.update_data({
         "contact_ru": message.text
     })

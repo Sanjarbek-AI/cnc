@@ -10,7 +10,7 @@ async def add_posts(message, state):
             telegram_id=message.from_user.id,
             images=data.get("images"),
             description=data.get("text"),
-            status=False,
+            status=UserPostStatus.unaccepted,
             created_at=message.date,
             updated_at=message.date
         )
@@ -33,7 +33,17 @@ async def get_comp_user(telegram_id, comp_id):
 
 async def get_user_post(post_id):
     try:
-        query = user_post.select().where(user_post.c.id == post_id, user_post.c.status == True)
+        query = user_post.select().where(user_post.c.id == post_id, user_post.c.status == UserPostStatus.accepted)
+        return await database.fetch_one(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
+async def get_user_post_like(post_id):
+    try:
+        query = posts_and_like.select().where(posts_and_like.c.user_post_id == post_id,
+                                              user_post.c.status == UserPostStatus.accepted)
         return await database.fetch_one(query=query)
     except Exception as exc:
         print(exc)
@@ -86,8 +96,9 @@ async def add_user_post_like(post_id, user_id):
 
 async def get_all_posts(comp_id):
     try:
-        query = posts_and_like.select().where(posts_and_like.c.comp_id == comp_id)
-        return await database.fetch_all(query=query)
+        query = user_post.select().where(user_post.c.comp_id == comp_id)
+        all_post = await database.fetch_all(query=query)
+        return all_post
     except Exception as exc:
         print(exc)
         return False
@@ -105,7 +116,7 @@ async def get_all_posts_users(comp_id):
 async def update_user_post_status(message, post_id):
     try:
         query = user_post.update().values(
-            status=True,
+            status=UserPostStatus.accepted,
             updated_at=message.date
         ).where(user_post.c.id == post_id)
         await database.execute(query=query)
@@ -119,7 +130,7 @@ async def get_user_active_comp_post(telegram_id, comp_id):
     try:
         query = user_post.select().where(user_post.c.comp_id == comp_id,
                                          user_post.c.telegram_id == telegram_id,
-                                         user_post.c.status == True)
+                                         user_post.c.status == UserPostStatus.accepted)
         post = await database.fetch_one(query=query)
         return post
     except Exception as exc:

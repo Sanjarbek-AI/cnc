@@ -22,7 +22,7 @@ async def get_users_list(id_list):
 
 async def get_users():
     try:
-        query = users.select().where(users.c.status == True)
+        query = users.select().where(users.c.status == UserStatus.active)
         return await database.fetch_all(query=query)
     except Exception as exc:
         print(exc)
@@ -31,7 +31,7 @@ async def get_users():
 
 async def get_users_status_false():
     try:
-        query = users.select().where(users.c.status == False)
+        query = users.select().where(users.c.status == UserStatus.inactive)
         return await database.fetch_all(query=query)
     except Exception as exc:
         print(exc)
@@ -47,7 +47,7 @@ async def register(message, state):
             location=data.get("location"),
             language=data.get("language"),
             phone_number=data.get("phone_number"),
-            status=True,
+            status=UserStatus.active,
             created_at=message.date,
             updated_at=message.date
         )
@@ -64,7 +64,7 @@ async def register_start(message):
             telegram_id=message.from_user.id,
             full_name=message.from_user.full_name,
             language="uz",
-            status=False,
+            status=UserStatus.inactive,
             created_at=message.date,
             updated_at=message.date
         )
@@ -77,7 +77,7 @@ async def register_start(message):
 
 async def get_competitions():
     try:
-        query = competitions.select().where(competitions.c.status == True)
+        query = competitions.select().where(competitions.c.status == CompetitionStatus.active)
         comp = await database.fetch_one(query=query)
         return comp
     except Exception as exc:
@@ -87,7 +87,8 @@ async def get_competitions():
 
 async def get_showrooms():
     try:
-        query = showrooms.select().where(showrooms.c.status == True)
+        query = showrooms.select().where(showrooms.c.status == ShowroomStatus.active,
+                                         showrooms.c.type == ShowroomType.showroom)
         return await database.fetch_all(query=query)
     except Exception as exc:
         print(exc)
@@ -105,7 +106,7 @@ async def get_showroom(showroom_id):
 
 async def get_contact():
     try:
-        query = contacts.select().where(contacts.c.status == True)
+        query = contacts.select().where(contacts.c.status == ContactStatus.active)
         return await database.fetch_one(query=query)
     except Exception as exc:
         print(exc)
@@ -120,7 +121,7 @@ async def add_contact(message, state):
             image_ru=data.get("image_ru"),
             contact_uz=data.get("contact_uz"),
             contact_ru=data.get("contact_ru"),
-            status=True,
+            status=ContactStatus.active,
             created_at=message.date,
             updated_at=message.date
         )
@@ -143,7 +144,7 @@ async def add_comp(message, state):
             gifts_image_ru=data.get("gifts_image_ru"),
             gifts_uz=data.get("gifts_uz"),
             gifts_ru=data.get("gifts_ru"),
-            status=False,
+            status=CompetitionStatus.deleted,
             created_at=message.date,
             updated_at=message.date
         )
@@ -156,7 +157,7 @@ async def add_comp(message, state):
 async def update_comp_status(message, comp_id):
     try:
         query = competitions.update().values(
-            status=True,
+            status=CompetitionStatus.active,
             updated_at=message.date
         ).where(competitions.c.id == comp_id)
         await database.execute(query=query)
@@ -177,7 +178,8 @@ async def add_showroom(message, state):
             name_uz=data.get("name_uz"),
             name_ru=data.get("name_ru"),
             location_link=data.get("link"),
-            status=True,
+            status=ShowroomStatus.active,
+            type=ShowroomType.showroom,
             created_at=message.date,
             updated_at=message.date
         )

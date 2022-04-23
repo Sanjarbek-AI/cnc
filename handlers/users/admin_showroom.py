@@ -14,7 +14,7 @@ from utils.db_api.update_showrooms import *
 
 
 @dp.message_handler(IsPrivate(), text=["Shovrumlar 🏣", "Mагазины 🏣"], chat_id=config.ADMINS)
-async def select_language(message: types):
+async def admin_showrooms(message: types):
     showroom_all = await get_showrooms()
     if showroom_all:
         text = _("Shovrumlar menyusi.")
@@ -25,14 +25,14 @@ async def select_language(message: types):
 
 
 @dp.callback_query_handler(text="add_showroom", chat_id=config.ADMINS)
-async def comp_conditions_change(call: CallbackQuery):
+async def add_showroom_func(call: CallbackQuery):
     text = _("O'zbek tili uchun shovrumning rasmini kiriting.")
     await call.message.answer(text, reply_markup=await back_admin_main_menu())
     await AddShowroom.image_uz.set()
 
 
 @dp.message_handler(state=AddShowroom.image_uz, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_image(message: types.Message, state: FSMContext):
     await state.update_data({
         "image_uz": message.photo[-1].file_id
     })
@@ -42,7 +42,7 @@ async def showrooms_menu_back(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddShowroom.image_ru, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_image(message: types.Message, state: FSMContext):
     await state.update_data({
         "image_ru": message.photo[-1].file_id
     })
@@ -52,7 +52,7 @@ async def showrooms_menu_back(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddShowroom.info_uz, chat_id=config.ADMINS)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_text(message: types.Message, state: FSMContext):
     await state.update_data({
         "info_uz": message.text
     })
@@ -62,7 +62,7 @@ async def showrooms_menu_back(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddShowroom.info_ru, chat_id=config.ADMINS)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_text(message: types.Message, state: FSMContext):
     await state.update_data({
         "info_ru": message.text
     })
@@ -72,7 +72,7 @@ async def showrooms_menu_back(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddShowroom.name_uz, chat_id=config.ADMINS)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_name(message: types.Message, state: FSMContext):
     await state.update_data({
         "name_uz": message.text
     })
@@ -82,7 +82,7 @@ async def showrooms_menu_back(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddShowroom.name_ru, chat_id=config.ADMINS)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_name(message: types.Message, state: FSMContext):
     await state.update_data({
         "name_ru": message.text
     })
@@ -92,7 +92,7 @@ async def showrooms_menu_back(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AddShowroom.link, chat_id=config.ADMINS)
-async def showrooms_menu_back(message: types.Message, state: FSMContext):
+async def showroom_link(message: types.Message, state: FSMContext):
     await state.update_data({
         "link": message.text
     })

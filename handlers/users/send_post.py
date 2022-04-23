@@ -5,7 +5,7 @@ from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
 from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, admin_main_menu
-from keyboards.inline.admins import send_post_def
+from keyboards.inline.admins import send_post_def, send_admin_post_all
 from loader import dp, _, bot
 from main import config
 from states.admins import SendPost
@@ -34,9 +34,32 @@ async def send_post(message: types.Message, state: FSMContext):
     await state.update_data({
         "text": message.text
     })
+    text = _("Post uchun pastki havolani kiriting.")
+    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await SendPost.link.set()
+
+
+@dp.message_handler(state=SendPost.link, chat_id=config.ADMINS)
+async def send_post(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "link": message.text
+    })
+    text = _("Post uchun pastki tugmadagi matnni kiriting.")
+    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await SendPost.button_text.set()
+
+
+@dp.message_handler(state=SendPost.button_text, chat_id=config.ADMINS)
+async def send_post(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "button_text": message.text
+    })
     data = await state.get_data()
 
-    await message.answer_photo(data.get("image"), caption=data.get("text"), reply_markup=await send_post_def())
+    await message.answer_photo(data.get("image"), caption=data.get("text"),
+                               reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    answer = "Jo'natishni hohlaysizmi ?"
+    await message.answer(answer, reply_markup=await send_post_def())
     await SendPost.waiting.set()
 
 
@@ -46,7 +69,8 @@ async def send_post_yes(call: CallbackQuery, state: FSMContext):
     users = await get_users()
     try:
         for user in users:
-            await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"))
+            await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"),
+                                 reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
 
         await state.finish()
         text = _("Habar barcha foydalanuvchilarga jo'natildi.")

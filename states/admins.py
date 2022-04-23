@@ -26,6 +26,8 @@ class AddContact(StatesGroup):
 class SendPost(StatesGroup):
     image = State()
     text = State()
+    link = State()
+    button_text = State()
     waiting = State()
 
 

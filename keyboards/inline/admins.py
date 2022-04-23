@@ -99,3 +99,14 @@ async def profile_def(lang, user_id):
         ]
     )
     return profile_change
+
+
+async def send_admin_post_all(text, link):
+    post_link = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text=text, url=link)
+            ]
+        ]
+    )
+    return post_link

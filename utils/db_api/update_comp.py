@@ -5,9 +5,9 @@ from main.models import *
 async def update_comp_all_status(message):
     try:
         query = competitions.update().values(
-            status=False,
+            status=CompetitionStatus.stopped,
             updated_at=message.date
-        ).where(competitions.c.status == True)
+        ).where(competitions.c.status == CompetitionStatus.active)
         await database.execute(query=query)
         return True
     except Exception as exc:
@@ -18,7 +18,7 @@ async def update_comp_all_status(message):
 async def update_comp_all_posts(message):
     try:
         query = user_post.update().values(
-            status=False,
+            status=UserPostStatus.disactive,
             updated_at=message.date
         ).where(user_post.c.status == True)
         await database.execute(query=query)
