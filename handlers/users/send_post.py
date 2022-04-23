@@ -68,9 +68,12 @@ async def send_post_yes(call: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     users = await get_users()
     try:
-        for user in users:
-            await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"),
-                                 reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+        try:
+            for user in users:
+                await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"),
+                                     reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+        except Exception as exc:
+            print(exc)
 
         await state.finish()
         text = _("Habar barcha foydalanuvchilarga jo'natildi.")

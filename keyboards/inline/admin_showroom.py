@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.callback_data import CallbackData
 
 from loader import _
-from utils.db_api.commands import get_showrooms
+from utils.db_api.commands import get_showrooms, get_dealers
 
 
 async def add_showroom_def():
@@ -14,6 +14,17 @@ async def add_showroom_def():
         ]
     )
     return add_showroom
+
+
+async def add_dealer_def():
+    add_dealer = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text=_("Diller qo'shish ➕"), callback_data="add_dealer")
+            ]
+        ]
+    )
+    return add_dealer
 
 
 async def showrooms_keyboard(lang):
@@ -37,6 +48,53 @@ async def showrooms_keyboard(lang):
         markup.insert(
             InlineKeyboardButton(text=_("O'zbek 🇺🇿"), callback_data='showrooms_uz')
         )
+
+    markup.insert(
+        InlineKeyboardButton(text=_("Dillerlarga o'tish ▶"), callback_data='admin_dealers')
+    )
+    return markup
+
+
+async def dealers_keyboard(lang):
+    markup = InlineKeyboardMarkup(row_width=1)
+
+    dealers_list = await get_dealers()
+
+    for dealer in dealers_list:
+        markup.insert(
+            InlineKeyboardButton(text=dealer['name_uz'] if lang == "uz" else dealer['name_ru'],
+                                 callback_data="dealers_" + lang + "_" + str(dealer['id']))
+        )
+    markup.insert(
+        InlineKeyboardButton(text=_("Diller qo'shish ➕"), callback_data='add_dealer')
+    )
+    if lang == "uz":
+        markup.insert(
+            InlineKeyboardButton(text=_("Ruscha 🇷🇺"), callback_data='dealers_ru')
+        )
+    else:
+        markup.insert(
+            InlineKeyboardButton(text=_("O'zbek 🇺🇿"), callback_data='dealers_uz')
+        )
+    markup.insert(
+        InlineKeyboardButton(text=_("Shovrumlarga qaytish ◀"), callback_data='back_to_showroom_menu_user')
+    )
+    return markup
+
+
+async def user_dealers_keyboard(lang):
+    markup = InlineKeyboardMarkup(row_width=1)
+
+    dealers_list = await get_dealers()
+
+    for dealer in dealers_list:
+        markup.insert(
+            InlineKeyboardButton(text=dealer['name_uz'] if lang == "uz" else dealer['name_ru'],
+                                 callback_data="dealers_" + lang + "_" + str(dealer['id']))
+        )
+    markup.insert(
+        InlineKeyboardButton(text=_("Shovrumlarga qaytish ◀"), callback_data='back_user_showroom_menu')
+    )
     return markup
 
 
@@ -50,8 +108,12 @@ async def showrooms_keyboard_user(lang):
             InlineKeyboardButton(text=showroom['name_uz'] if lang == "uz" else showroom['name_ru'],
                                  callback_data="showroom_" + lang + "_" + str(showroom['id']))
         )
+    markup.insert(
+        InlineKeyboardButton(text="Dillerlarni ko'rish ⏩", callback_data="user_dealers")
+    )
 
     return markup
+
 
 change_showroom = CallbackData("change_sh_image", "act", "lang", "sh_id")
 

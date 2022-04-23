@@ -95,9 +95,28 @@ async def get_showrooms():
         return False
 
 
+async def get_dealers():
+    try:
+        query = showrooms.select().where(showrooms.c.status == ShowroomStatus.active,
+                                         showrooms.c.type == ShowroomType.dealer)
+        return await database.fetch_all(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_showroom(showroom_id):
     try:
         query = showrooms.select().where(showrooms.c.id == showroom_id)
+        return await database.fetch_one(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
+async def get_dealer(dealer_id):
+    try:
+        query = showrooms.select().where(showrooms.c.id == dealer_id, showrooms.c.type == ShowroomType.dealer)
         return await database.fetch_one(query=query)
     except Exception as exc:
         print(exc)
@@ -180,6 +199,29 @@ async def add_showroom(message, state):
             location_link=data.get("link"),
             status=ShowroomStatus.active,
             type=ShowroomType.showroom,
+            created_at=message.date,
+            updated_at=message.date
+        )
+        await database.execute(query=query)
+        return True
+    except Exception as exc:
+        print(exc)
+        return False
+
+
+async def add_dealer(message, state):
+    try:
+        data = await state.get_data()
+        query = showrooms.insert().values(
+            image_uz=data.get("image_uz"),
+            image_ru=data.get("image_ru"),
+            info_uz=data.get("info_uz"),
+            info_ru=data.get("info_ru"),
+            name_uz=data.get("name_uz"),
+            name_ru=data.get("name_ru"),
+            location_link=data.get("link"),
+            status=ShowroomStatus.active,
+            type=ShowroomType.dealer,
             created_at=message.date,
             updated_at=message.date
         )

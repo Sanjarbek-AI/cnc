@@ -8,13 +8,13 @@ from keyboards.inline.admin_showroom import *
 from keyboards.inline.users import showroom_menu_user
 from loader import dp, _, bot
 from main import config
-from states.admins import UpdateShowroom, AddShowroom
+from states.admins import UpdateShowroom, AddShowroom, AddDealer
 from utils.db_api.commands import *
 from utils.db_api.update_showrooms import *
 
 
 @dp.message_handler(IsPrivate(), text=["Shovrumlar 🏣", "Mагазины 🏣"], chat_id=config.ADMINS)
-async def admin_showrooms(message: types):
+async def admin_showrooms(message: types.Message):
     showroom_all = await get_showrooms()
     if showroom_all:
         text = _("Shovrumlar menyusi.")
@@ -24,11 +24,30 @@ async def admin_showrooms(message: types):
         await message.answer(text, reply_markup=await add_showroom_def())
 
 
+@dp.callback_query_handler(text="admin_dealers", chat_id=config.ADMINS)
+async def admin_showrooms(call: CallbackQuery):
+    dealers_all = await get_dealers()
+    if dealers_all:
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        text = _("Diller menyusi.")
+        await call.message.answer(text, reply_markup=await dealers_keyboard("uz"))
+    else:
+        text = _("Hozirda dillerlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan foydalaning.")
+        await call.message.answer(text, reply_markup=await add_dealer_def())
+
+
 @dp.callback_query_handler(text="add_showroom", chat_id=config.ADMINS)
 async def add_showroom_func(call: CallbackQuery):
     text = _("O'zbek tili uchun shovrumning rasmini kiriting.")
     await call.message.answer(text, reply_markup=await back_admin_main_menu())
     await AddShowroom.image_uz.set()
+
+
+@dp.callback_query_handler(text="add_dealer", chat_id=config.ADMINS)
+async def add_showroom_func(call: CallbackQuery):
+    text = _("O'zbek tili uchun dillerning rasmini kiriting.")
+    await call.message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.image_uz.set()
 
 
 @dp.message_handler(state=AddShowroom.image_uz, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
@@ -98,6 +117,81 @@ async def showroom_link(message: types.Message, state: FSMContext):
     })
     if await add_showroom(message, state):
         text = _("Shovrumning qo'shildi.")
+    else:
+        text = _("Botda nosozlik yuz berdi.")
+    await message.answer(text, reply_markup=await admin_main_menu())
+    await state.finish()
+
+
+# ****************************************************************************************
+
+@dp.message_handler(state=AddDealer.image_uz, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
+async def showroom_image(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "image_uz": message.photo[-1].file_id
+    })
+    text = _("Rus tili uchun diller rasmini kiriting.")
+    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.image_ru.set()
+
+
+@dp.message_handler(state=AddDealer.image_ru, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
+async def showroom_image(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "image_ru": message.photo[-1].file_id
+    })
+    text = _("O'zbek tili uchun diller matnini kiriting.")
+    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.info_uz.set()
+
+
+@dp.message_handler(state=AddDealer.info_uz, chat_id=config.ADMINS)
+async def showroom_text(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "info_uz": message.text
+    })
+    text = _("Rus tili uchun diller matnini kiriting.")
+    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.info_ru.set()
+
+
+@dp.message_handler(state=AddDealer.info_ru, chat_id=config.ADMINS)
+async def showroom_text(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "info_ru": message.text
+    })
+    text = _("O'zbek tili uchun diller nomini kiriting.")
+    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.name_uz.set()
+
+
+@dp.message_handler(state=AddDealer.name_uz, chat_id=config.ADMINS)
+async def showroom_name(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "name_uz": message.text
+    })
+    text = _("Rus tili uchun diller nomini kiriting.")
+    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.name_ru.set()
+
+
+@dp.message_handler(state=AddDealer.name_ru, chat_id=config.ADMINS)
+async def showroom_name(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "name_ru": message.text
+    })
+    text = _("Dillerning xaritadagi linkini kiriting.")
+    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await AddDealer.link.set()
+
+
+@dp.message_handler(state=AddDealer.link, chat_id=config.ADMINS)
+async def showroom_link(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "link": message.text
+    })
+    if await add_dealer(message, state):
+        text = _("Diller qo'shildi.")
     else:
         text = _("Botda nosozlik yuz berdi.")
     await message.answer(text, reply_markup=await admin_main_menu())
@@ -331,6 +425,18 @@ async def showrooms_menu_back(call: CallbackQuery, callback_data: dict):
                                         reply_markup=await update_showroom_def("uz", sh_id))
 
 
+@dp.callback_query_handler(text="back_to_showroom_menu_user", chat_id=config.ADMINS)
+async def admin_showrooms(call: CallbackQuery):
+    await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+    showroom_all = await get_showrooms()
+    if showroom_all:
+        text = _("Shovrumlar menyusi.")
+        await call.message.answer(text, reply_markup=await showrooms_keyboard("uz"))
+    else:
+        text = _("Hozirda shovrumlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan foydalaning.")
+        await call.message.answer(text, reply_markup=await add_showroom_def())
+
+
 @dp.callback_query_handler(chat_id=config.ADMINS)
 async def showroom_get(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
@@ -345,7 +451,13 @@ async def showroom_get(call: CallbackQuery):
             caption=showroom['info_uz'] if lang == "uz" else showroom['info_ru'],
             reply_markup=await update_showroom_def(lang, showroom['id']))
     else:
-        pass
+        lang = callback_data[1]
+        dealer = await get_dealer(int(callback_data[2]))
+
+        await call.message.answer_photo(
+            photo=dealer['image_uz'] if lang == "uz" else dealer['image_ru'],
+            caption=dealer['info_uz'] if lang == "uz" else dealer['info_ru'],
+            reply_markup=await update_showroom_def(lang, dealer['id']))
 
 
 @dp.callback_query_handler()
@@ -367,4 +479,15 @@ async def showroom_get(call: CallbackQuery):
                 caption=showroom['info_ru'],
                 reply_markup=await showroom_menu_user(showroom["location_link"]))
     else:
-        pass
+        dealer = await get_dealer(int(callback_data[2]))
+        user = await get_user(call.from_user.id)
+        if user["language"] == "uz":
+            await call.message.answer_photo(
+                photo=dealer['image_uz'],
+                caption=dealer['info_uz'],
+                reply_markup=await showroom_menu_user(dealer["location_link"]))
+        else:
+            await call.message.answer_photo(
+                photo=dealer['image_ru'],
+                caption=dealer['info_ru'],
+                reply_markup=await showroom_menu_user(dealer["location_link"]))

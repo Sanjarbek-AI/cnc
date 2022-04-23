@@ -1,10 +1,9 @@
 from aiogram import types
-from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
 
 from filters.private_chat import IsPrivate
 from keyboards.default.users import users_main_menu
-from keyboards.inline.admin_showroom import showrooms_keyboard_user
+from keyboards.inline.admin_showroom import showrooms_keyboard_user, user_dealers_keyboard
 from keyboards.inline.admins import profile_def
 from keyboards.inline.users import comp_menu_def, back_user_comp_menu, post_like
 from loader import dp, _, bot
@@ -93,6 +92,18 @@ async def get_user_showrooms(message: types):
     else:
         text = _("Botda nosozlik yuz berdi.")
         await message.answer(text, reply_markup=await users_main_menu())
+
+
+@dp.callback_query_handler(text="user_dealers")
+async def user_dealers(call: CallbackQuery):
+    dealers_all = await get_dealers()
+    if dealers_all:
+        await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+        text = _("Bizning rasmiy dillerlarimiz ro'yxati.")
+        await call.message.answer(text, reply_markup=await user_dealers_keyboard("uz"))
+    else:
+        text = _("Hozirda dillerlar mavjud emas.")
+        await call.message.answer(text, reply_markup=await users_main_menu())
 
 
 @dp.callback_query_handler(text="back_user_showroom_menu")

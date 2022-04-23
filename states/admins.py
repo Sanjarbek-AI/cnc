@@ -69,6 +69,15 @@ class AddShowroom(StatesGroup):
     link = State()
 
 
+class AddDealer(StatesGroup):
+    image_uz = State()
+    image_ru = State()
+    info_uz = State()
+    info_ru = State()
+    name_uz = State()
+    name_ru = State()
+    link = State()
+
 class UpdateProfile(StatesGroup):
     full_name = State()
     phone_number = State()
