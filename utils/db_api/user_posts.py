@@ -40,6 +40,15 @@ async def get_user_post(post_id):
         return False
 
 
+async def get_user_post_by_id(post_id):
+    try:
+        query = user_post.select().where(user_post.c.id == post_id)
+        return await database.fetch_one(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_user_post_like(post_id):
     try:
         query = posts_and_like.select().where(posts_and_like.c.user_post_id == post_id,

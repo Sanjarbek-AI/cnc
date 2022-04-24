@@ -10,7 +10,8 @@ from main.config import CHANNELS
 from main.constants import UserPostStatus
 from states.users import UserSendPost
 from utils.db_api.commands import get_competitions
-from utils.db_api.user_posts import add_posts, get_comp_user, update_user_post_status, get_user_post
+from utils.db_api.user_posts import add_posts, get_comp_user, update_user_post_status, get_user_post, \
+    get_user_post_by_id
 from utils.misc.checking_user_membership import check
 
 
@@ -104,17 +105,20 @@ async def admin_answer_yes(call: types.CallbackQuery, callback_data: dict):
 
 
 @dp.callback_query_handler(callback_admin_answer.filter(act="admin_answer_no"))
-async def admin_answer_no(callback_data: dict):
+async def admin_answer_no(call: CallbackQuery, callback_data: dict):
     post_id = int(callback_data.get("post_id"))
-    post = await get_user_post(post_id)
+    post = await get_user_post_by_id(post_id)
     if post:
         if post["status"] == UserPostStatus.accepted:
             text = "Allaqachon qabul qilingan !!!"
             await bot.send_message(chat_id="-1001538496752", text=text)
-    else:
-        text = _("Sizning rasmlaringiz qabul qilinmadi.")
-        await bot.send_message(chat_id=post["telegram_id"], text=text,
-                               reply_markup=await users_main_menu())
+        else:
+            text = _("Sizning rasmlaringiz qabul qilinmadi.")
+            await bot.send_message(chat_id=post["telegram_id"], text=text,
+                                   reply_markup=await users_main_menu())
 
-        text = "Qabul qilinmadi ❌ ❌ ❌"
+            text = "Qabul qilinmadi ❌ ❌ ❌"
+            await bot.send_message(chat_id="-1001538496752", text=text)
+    else:
+        text = "Botda nosozlik mavjud."
         await bot.send_message(chat_id="-1001538496752", text=text)
