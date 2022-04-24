@@ -29,9 +29,9 @@ async def get_users():
         return False
 
 
-async def get_top_users(id_list):
+async def get_top_users():
     try:
-        query = posts_and_like.select().where(posts_and_like.c.user_post_id in id_list).order_by('like')
+        query = posts_and_like.select().where().order_by('like')
         return await database.fetch_all(query=query)
     except Exception as exc:
         print(exc)

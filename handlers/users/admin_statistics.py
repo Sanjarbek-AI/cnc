@@ -78,19 +78,28 @@ async def export_excel(call: CallbackQuery):
 async def export_excel(call: CallbackQuery):
     comp = await get_competitions()
     if comp:
-        active_posts = await get_all_posts_users(comp["id"])
-        id_list = [post["id"] for post in active_posts]
-        top_users_posts = await get_top_users(id_list)
-        text = """**********************************"""
-        for post in top_users_posts[-1: -11]:
-            user = await get_user(post["telegram_id"])
-            text += f"""
+        try:
+            active_posts = await get_all_posts_users(comp["id"])
+            id_list = [post["id"] for post in active_posts]
+            top_users_posts = await get_top_users()
+            new_posts = list()
+            for user_post in top_users_posts:
+                if user_post["user_post_id"] in id_list:
+                    new_posts.append(user_post)
+            text = """**********************************"""
+            for post in new_posts[::-1][-9:]:
+                user = await get_user(post["telegram_id"])
+                text += f"""
     IF: {user["full_name"]}              
     Raqam: {user["phone_number"]}
     Like: {post["like"]}  \n   
 **********************************
-    """
-        await call.message.answer(text=text, reply_markup=await admin_main_menu())
+        """
+            await call.message.answer(text=text, reply_markup=await admin_main_menu())
+        except Exception as exc:
+            print(exc)
+            text = "Botda nosozlik bor."
+            await call.message.answer(text=text, reply_markup=await admin_main_menu())
     else:
         text = "Faol ko'nkur mavjud emas."
         await call.message.answer(text=text, reply_markup=await admin_main_menu())
