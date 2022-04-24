@@ -99,7 +99,11 @@ async def user_dealers(call: CallbackQuery):
     dealers_all = await get_dealers()
     if dealers_all:
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-        text = _("Bizning rasmiy dillerlarimiz ro'yxati.")
+        user = await get_user(call.from_user.id)
+        if user["language"] == "ru":
+            text = _("Список наших официальных дилеров.")
+        else:
+            text = _("Bizning rasmiy dillerlarimiz ro'yxati.")
         user = await get_user(call.from_user.id)
         await call.message.answer(text, reply_markup=await user_dealers_keyboard(user["language"]))
     else:

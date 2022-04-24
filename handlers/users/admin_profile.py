@@ -27,7 +27,7 @@ async def admin_profile(message: types.Message):
         await message.answer(text, reply_markup=await admin_main_menu())
 
 
-@dp.message_handler(IsPrivate(), text=['Ortga ◀'], chat_id=config.ADMINS)
+@dp.message_handler(IsPrivate(), text=['Ortga ◀'], chat_id=config.ADMINS, state="*")
 async def back_main_menu(message: types):
     text = _("Asosiy menyu.")
     await message.answer(text, reply_markup=await admin_main_menu())

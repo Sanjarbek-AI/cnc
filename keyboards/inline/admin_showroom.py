@@ -92,8 +92,12 @@ async def user_dealers_keyboard(lang):
             InlineKeyboardButton(text=dealer['name_uz'] if lang == "uz" else dealer['name_ru'],
                                  callback_data="dealers_" + lang + "_" + str(dealer['id']))
         )
+    if lang == "ru":
+        text = "Вернуться к Шоврумсу ◀"
+    else:
+        text = "Shovrumlarga qaytish ◀"
     markup.insert(
-        InlineKeyboardButton(text=_("Shovrumlarga qaytish ◀"), callback_data='back_user_showroom_menu')
+        InlineKeyboardButton(text=text, callback_data='back_user_showroom_menu')
     )
     return markup
 
@@ -108,8 +112,12 @@ async def showrooms_keyboard_user(lang):
             InlineKeyboardButton(text=showroom['name_uz'] if lang == "uz" else showroom['name_ru'],
                                  callback_data="showroom_" + lang + "_" + str(showroom['id']))
         )
+    if lang == "ru":
+        text = "Посмотреть дилеров ⏩"
+    else:
+        text = "Dillerlarni ko'rish ⏩"
     markup.insert(
-        InlineKeyboardButton(text="Dillerlarni ko'rish ⏩", callback_data="user_dealers")
+        InlineKeyboardButton(text=text, callback_data="user_dealers")
     )
 
     return markup
