@@ -17,7 +17,6 @@ from states.users import Register
 from utils.db_api.commands import register, get_competitions, get_user, register_start
 from utils.db_api.user_posts import get_comp_user, get_user_post
 from utils.misc.checking_user_membership import check
-from utils.misc.phone_checker import is_valid
 
 
 @dp.message_handler(IsPrivate(), chat_id=config.ADMINS, commands="start")
@@ -80,18 +79,23 @@ async def full_name(message: types.Message, state: FSMContext):
     await Register.phone_number.set()
 
 
+# @dp.message_handler(state=Register.phone_number)
+# async def get_phone_number(message: types.Message, state: FSMContext):
+#     if await is_valid(message.text):
+#         await state.update_data({
+#             "phone_number": message.text
+#         })
+#         text = "Asosiy ish hududingizni tanlang."
+#         await message.answer(text, reply_markup=await locations_def())
+#         await Register.location.set()
+#     else:
+#         text = "Iltimos telefon raqamingizni tog'ri kiriting !"
+#         await message.answer(text)
+
 @dp.message_handler(state=Register.phone_number)
 async def get_phone_number(message: types.Message, state: FSMContext):
-    if await is_valid(message.text):
-        await state.update_data({
-            "phone_number": message.text
-        })
-        text = "Asosiy ish hududingizni tanlang."
-        await message.answer(text, reply_markup=await locations_def())
-        await Register.location.set()
-    else:
-        text = "Iltimos telefon raqamingizni tog'ri kiriting !"
-        await message.answer(text)
+    text = "Iltimos tugmadan foydalaning."
+    await message.answer(text, reply_markup=await contact_def())
 
 
 @dp.message_handler(content_types=types.ContentTypes.CONTACT, state=Register.phone_number)
@@ -170,5 +174,3 @@ async def checking(call: CallbackQuery):
         else:
             answer = _("Картинка не отправлена. ❌")
     await call.message.answer(answer, reply_markup=await users_main_menu())
-
-

@@ -8,8 +8,8 @@ from keyboards.default.admins import admin_main_menu
 from keyboards.inline.users import export_excel_users
 from loader import dp, _
 from main import config
-from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_users_list, \
-    get_user
+from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user, \
+    get_top_users
 from utils.db_api.user_posts import get_all_posts_users
 
 
@@ -72,3 +72,25 @@ async def export_excel(call: CallbackQuery):
     else:
         text = _("Aktiv konkurs mavjud emas.")
         await call.message.answer(text, reply_markup=await admin_main_menu())
+
+
+@dp.callback_query_handler(text="top_10_users", chat_id=config.ADMINS)
+async def export_excel(call: CallbackQuery):
+    comp = await get_competitions()
+    if comp:
+        active_posts = await get_all_posts_users(comp["id"])
+        id_list = [post["id"] for post in active_posts]
+        top_users_posts = await get_top_users(id_list)
+        text = """**********************************"""
+        for post in top_users_posts[-1: -11]:
+            user = await get_user(post["telegram_id"])
+            text += f"""
+    IF: {user["full_name"]}              
+    Raqam: {user["phone_number"]}
+    Like: {post["like"]}  \n   
+**********************************
+    """
+        await call.message.answer(text=text, reply_markup=await admin_main_menu())
+    else:
+        text = "Faol ko'nkur mavjud emas."
+        await call.message.answer(text=text, reply_markup=await admin_main_menu())

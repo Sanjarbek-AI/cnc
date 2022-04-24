@@ -29,6 +29,15 @@ async def get_users():
         return False
 
 
+async def get_top_users(id_list):
+    try:
+        query = posts_and_like.select().where(posts_and_like.c.user_post_id in id_list).order_by('like')
+        return await database.fetch_all(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_users_status_false():
     try:
         query = users.select().where(users.c.status == UserStatus.inactive)

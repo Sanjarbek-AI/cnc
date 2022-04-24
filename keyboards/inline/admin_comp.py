@@ -19,6 +19,9 @@ async def update_comp_def(lang):
             [
                 InlineKeyboardButton(text=_("O'zbek 🇺🇿"), callback_data="comp_uz"),
                 InlineKeyboardButton(text=_("Ruscha 🇷🇺"), callback_data="comp_ru"),
+            ],
+            [
+                InlineKeyboardButton(text=_("Top 10 foydalanuvchilar 🔝"), callback_data="top_10_users")
             ]
         ]
     )
