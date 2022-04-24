@@ -7,6 +7,7 @@ from keyboards.default.users import users_main_menu
 from keyboards.inline.users import admin_answer_def, callback_admin_answer, post_like
 from loader import dp, _, bot
 from main.config import CHANNELS
+from main.constants import UserPostStatus
 from states.users import UserSendPost
 from utils.db_api.commands import get_competitions
 from utils.db_api.user_posts import add_posts, get_comp_user, update_user_post_status, get_user_post
@@ -106,9 +107,10 @@ async def admin_answer_yes(call: types.CallbackQuery, callback_data: dict):
 async def admin_answer_no(callback_data: dict):
     post_id = int(callback_data.get("post_id"))
     post = await get_user_post(post_id)
-    if post["status"]:
-        text = "Allaqachon qabul qilingan !!!"
-        await bot.send_message(chat_id="-1001538496752", text=text)
+    if post:
+        if post["status"] == UserPostStatus.accepted:
+            text = "Allaqachon qabul qilingan !!!"
+            await bot.send_message(chat_id="-1001538496752", text=text)
     else:
         text = _("Sizning rasmlaringiz qabul qilinmadi.")
         await bot.send_message(chat_id=post["telegram_id"], text=text,

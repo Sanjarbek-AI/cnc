@@ -100,7 +100,8 @@ async def user_dealers(call: CallbackQuery):
     if dealers_all:
         await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
         text = _("Bizning rasmiy dillerlarimiz ro'yxati.")
-        await call.message.answer(text, reply_markup=await user_dealers_keyboard("uz"))
+        user = await get_user(call.from_user.id)
+        await call.message.answer(text, reply_markup=await user_dealers_keyboard(user["language"]))
     else:
         text = _("Hozirda dillerlar mavjud emas.")
         await call.message.answer(text, reply_markup=await users_main_menu())
@@ -112,7 +113,8 @@ async def back_user_showroom_menu(call: CallbackQuery):
     showroom_all = await get_showrooms()
     if showroom_all:
         text = _("Bizning rasmiy diller va do'konlarimiz haqida:")
-        await call.message.answer(text, reply_markup=await showrooms_keyboard_user("uz"))
+        user = await get_user(call.from_user.id)
+        await call.message.answer(text, reply_markup=await showrooms_keyboard_user(user["language"]))
     else:
         text = _("Botda nosozlik yuz berdi.")
         await call.message.answer(text, reply_markup=await users_main_menu())

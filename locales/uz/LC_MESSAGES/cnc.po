@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-04-12 15:47+0500\n"
+"POT-Creation-Date: 2022-04-23 16:22+0500\n"
 "PO-Revision-Date: 2022-04-04 13:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uz\n"
@@ -18,100 +18,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: handlers/users/admin_backs.py:13 handlers/users/admin_backs.py:20
-#: handlers/users/admin_profile.py:31
+#: handlers/users/admin_backs.py:14 handlers/users/admin_backs.py:21
+#: handlers/users/admin_profile.py:32
 msgid "Asosiy menyu."
 msgstr ""
 
-#: handlers/users/admin_comp.py:24
+#: handlers/users/admin_comp.py:25
 msgid ""
 "Hozirda faol konkurslar mavjud emas. Yangi qo'shish uchun pastdagi "
 "tugmadan foydalaning."
 msgstr ""
 
-#: handlers/users/admin_comp.py:30
+#: handlers/users/admin_comp.py:31
 msgid "O'zbek tili uchun konkursni rasmini yuboring."
 msgstr ""
 
-#: handlers/users/admin_comp.py:40
+#: handlers/users/admin_comp.py:41
 msgid "Rus tili uchun konkursni rasmini yuboring."
 msgstr ""
 
-#: handlers/users/admin_comp.py:50
+#: handlers/users/admin_comp.py:51
 msgid "O'zbek tili uchun konkurs shartlarini yuboring."
 msgstr ""
 
-#: handlers/users/admin_comp.py:60
+#: handlers/users/admin_comp.py:61
 msgid "Rus tili uchun konkurs shartlarini yuboring."
 msgstr ""
 
-#: handlers/users/admin_comp.py:70
+#: handlers/users/admin_comp.py:71
 msgid "O'zbek tili uchun sovg'alarni rasmini jo'nating."
 msgstr ""
 
-#: handlers/users/admin_comp.py:80
+#: handlers/users/admin_comp.py:81
 msgid "Rus tili uchun sovg'alarni rasmini jo'nating."
 msgstr ""
 
-#: handlers/users/admin_comp.py:90
+#: handlers/users/admin_comp.py:91
 msgid "O'zbek tili uchun sovg'alarni matnini yuboring."
 msgstr ""
 
-#: handlers/users/admin_comp.py:100
+#: handlers/users/admin_comp.py:101
 msgid "Rus tili uchun sovg'alarni matnini yuboring."
 msgstr ""
 
-#: handlers/users/admin_comp.py:113
+#: handlers/users/admin_comp.py:114
 msgid "Konkursni boshlashni hohlaysizmi ?"
 msgstr ""
 
-#: handlers/users/admin_comp.py:116 handlers/users/admin_comp.py:127
+#: handlers/users/admin_comp.py:117 handlers/users/admin_comp.py:128
 msgid "Botda xatolik yuz berdi !!!"
 msgstr ""
 
-#: handlers/users/admin_comp.py:124
+#: handlers/users/admin_comp.py:125
 msgid "Konkurs boshlandi."
 msgstr ""
 
-#: handlers/users/admin_comp.py:133
+#: handlers/users/admin_comp.py:134
 msgid "Konkurs bekor qilindi."
 msgstr ""
 
-#: handlers/users/admin_comp.py:140
+#: handlers/users/admin_comp.py:141
 msgid "Konkursni yakunlashni hohlaysizmi ?"
 msgstr ""
 
-#: handlers/users/admin_comp.py:148
+#: handlers/users/admin_comp.py:149
 msgid "Konkurs yakunlandi."
 msgstr ""
 
-#: handlers/users/admin_comp.py:152 handlers/users/admin_comp_update.py:32
+#: handlers/users/admin_comp.py:153 handlers/users/admin_comp_update.py:32
 #: handlers/users/admin_comp_update.py:54
 #: handlers/users/admin_comp_update.py:76
 #: handlers/users/admin_comp_update.py:98
 #: handlers/users/admin_comp_update.py:137
 #: handlers/users/admin_comp_update.py:160
 #: handlers/users/admin_comp_update.py:182
-#: handlers/users/admin_comp_update.py:204 handlers/users/admin_contact.py:97
-#: handlers/users/admin_contact.py:124 handlers/users/admin_contact.py:149
-#: handlers/users/admin_contact.py:174 handlers/users/admin_contact.py:199
-#: handlers/users/admin_profile.py:25 handlers/users/admin_profile.py:66
-#: handlers/users/admin_profile.py:98 handlers/users/admin_profile.py:129
-#: handlers/users/admin_profile.py:161 handlers/users/admin_profile.py:182
-#: handlers/users/admin_showroom.py:101 handlers/users/admin_showroom.py:145
-#: handlers/users/admin_showroom.py:162 handlers/users/admin_showroom.py:198
-#: handlers/users/admin_showroom.py:215 handlers/users/admin_showroom.py:251
-#: handlers/users/admin_showroom.py:268 handlers/users/admin_showroom.py:298
-#: handlers/users/send_post.py:56 handlers/users/start.py:138
-#: handlers/users/user_menu.py:30 handlers/users/user_menu.py:77
-#: handlers/users/user_menu.py:92 handlers/users/user_menu.py:104
-#: handlers/users/user_menu.py:127 handlers/users/user_profile.py:46
-#: handlers/users/user_profile.py:78 handlers/users/user_profile.py:109
-#: handlers/users/user_profile.py:141
+#: handlers/users/admin_comp_update.py:204 handlers/users/admin_contact.py:98
+#: handlers/users/admin_contact.py:125 handlers/users/admin_contact.py:150
+#: handlers/users/admin_contact.py:175 handlers/users/admin_contact.py:200
+#: handlers/users/admin_profile.py:26 handlers/users/admin_profile.py:67
+#: handlers/users/admin_profile.py:99 handlers/users/admin_profile.py:130
+#: handlers/users/admin_profile.py:162 handlers/users/admin_profile.py:182
+#: handlers/users/admin_showroom.py:145 handlers/users/admin_showroom.py:220
+#: handlers/users/admin_showroom.py:264 handlers/users/admin_showroom.py:281
+#: handlers/users/admin_showroom.py:317 handlers/users/admin_showroom.py:334
+#: handlers/users/admin_showroom.py:370 handlers/users/admin_showroom.py:387
+#: handlers/users/admin_showroom.py:417 handlers/users/send_post.py:84
+#: handlers/users/start.py:135 handlers/users/user_menu.py:30
+#: handlers/users/user_menu.py:78 handlers/users/user_menu.py:93
+#: handlers/users/user_menu.py:117 handlers/users/user_menu.py:140
+#: handlers/users/user_profile.py:46 handlers/users/user_profile.py:78
+#: handlers/users/user_profile.py:109 handlers/users/user_profile.py:140
 msgid "Botda nosozlik yuz berdi."
 msgstr ""
 
-#: handlers/users/admin_comp.py:160
+#: handlers/users/admin_comp.py:161
 msgid "Konkurs to'xtatilmadi."
 msgstr ""
 
@@ -122,10 +122,10 @@ msgstr ""
 #: handlers/users/admin_comp_update.py:24
 #: handlers/users/admin_comp_update.py:46
 #: handlers/users/admin_comp_update.py:129
-#: handlers/users/admin_comp_update.py:152 handlers/users/admin_contact.py:114
-#: handlers/users/admin_contact.py:139 handlers/users/admin_contact.py:164
-#: handlers/users/admin_contact.py:189 handlers/users/admin_showroom.py:137
-#: handlers/users/admin_showroom.py:154
+#: handlers/users/admin_comp_update.py:152 handlers/users/admin_contact.py:115
+#: handlers/users/admin_contact.py:140 handlers/users/admin_contact.py:165
+#: handlers/users/admin_contact.py:190 handlers/users/admin_showroom.py:256
+#: handlers/users/admin_showroom.py:273
 msgid "Rasm yangilandi."
 msgstr ""
 
@@ -160,170 +160,215 @@ msgid "O'zbek uchun sovg'alarning yangi matnini kiriting."
 msgstr ""
 
 #: handlers/users/admin_comp_update.py:174
-#: handlers/users/admin_comp_update.py:196 handlers/users/admin_showroom.py:190
-#: handlers/users/admin_showroom.py:207
+#: handlers/users/admin_comp_update.py:196 handlers/users/admin_showroom.py:309
+#: handlers/users/admin_showroom.py:326
 msgid "Matn yangilandi."
 msgstr ""
 
-#: handlers/users/admin_contact.py:24
+#: handlers/users/admin_contact.py:25
 msgid ""
 "Bog'lanish malumotlari mavjud emas. Qo'shish uchun pastdagi tugmadan "
 "foydalaning."
 msgstr ""
 
-#: handlers/users/admin_contact.py:50
+#: handlers/users/admin_contact.py:51
 msgid "O'zbek tili uchun kontank rasmini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:61
+#: handlers/users/admin_contact.py:62
 msgid "Rus tili uchun kontank rasmini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:72
+#: handlers/users/admin_contact.py:73
 msgid "O'zbek tili uchun kontank matnini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:83
+#: handlers/users/admin_contact.py:84
 msgid "Rus tili uchun kontank matnini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:95
+#: handlers/users/admin_contact.py:96
 msgid "Kontakt ma'lumotlari qo'shildi."
 msgstr ""
 
-#: handlers/users/admin_contact.py:105
+#: handlers/users/admin_contact.py:106
 msgid "O'zbek tili uchun kontank yangi rasmini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:130
+#: handlers/users/admin_contact.py:131
 msgid "Rus tili uchun kontank yangi rasmini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:155
+#: handlers/users/admin_contact.py:156
 msgid "O'zbek tili uchun kontank yangi matnini kiriting."
 msgstr ""
 
-#: handlers/users/admin_contact.py:180
+#: handlers/users/admin_contact.py:181
 msgid "Rus tili uchun kontank yangi matnini kiriting."
 msgstr ""
 
-#: handlers/users/admin_profile.py:44 handlers/users/user_profile.py:26
+#: handlers/users/admin_profile.py:45 handlers/users/user_profile.py:26
 msgid "Yangi tilni tanlang."
 msgstr ""
 
-#: handlers/users/admin_profile.py:57 handlers/users/user_profile.py:37
+#: handlers/users/admin_profile.py:58 handlers/users/user_profile.py:37
 msgid "Til yangilangi."
 msgstr ""
 
-#: handlers/users/admin_profile.py:79
+#: handlers/users/admin_profile.py:80
 msgid "Yangi ism familiyani kiriting"
 msgstr ""
 
-#: handlers/users/admin_profile.py:89
+#: handlers/users/admin_profile.py:90
 msgid "Ism familiya yangilangi."
 msgstr ""
 
-#: handlers/users/admin_profile.py:111
+#: handlers/users/admin_profile.py:112
 msgid "Yangi manzilni tanlang"
 msgstr ""
 
-#: handlers/users/admin_profile.py:142 handlers/users/user_profile.py:122
+#: handlers/users/admin_profile.py:143 handlers/users/user_profile.py:122
 msgid "Yangi telefon raqamni kiriting."
 msgstr ""
 
-#: handlers/users/admin_profile.py:154 handlers/users/admin_profile.py:175
-#: handlers/users/user_profile.py:134
+#: handlers/users/admin_profile.py:155 handlers/users/admin_profile.py:175
+#: handlers/users/user_profile.py:133
 msgid "Telefon raqam yangilandi."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:19 handlers/users/admin_showroom.py:109
-#: handlers/users/admin_showroom.py:305 handlers/users/admin_showroom.py:312
+#: handlers/users/admin_showroom.py:20 handlers/users/admin_showroom.py:228
+#: handlers/users/admin_showroom.py:424 handlers/users/admin_showroom.py:431
+#: handlers/users/admin_showroom.py:457
 msgid "Shovrumlar menyusi."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:22
+#: handlers/users/admin_showroom.py:23 handlers/users/admin_showroom.py:460
 msgid ""
 "Hozirda shovrumlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan "
 "foydalaning."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:28
+#: handlers/users/admin_showroom.py:32 handlers/users/admin_showroom.py:44
+#: handlers/users/admin_showroom.py:56
+msgid "Dillerlar menyusi."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:35 handlers/users/admin_showroom.py:47
+#: handlers/users/admin_showroom.py:59
+msgid ""
+"Hozirda dillerlar mavjud emas. Yangi qo'shish uchun pastdagi tugmadan "
+"foydalaning."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:65
 msgid "O'zbek tili uchun shovrumning rasmini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:38
+#: handlers/users/admin_showroom.py:72
+msgid "O'zbek tili uchun dillerning rasmini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:82
 msgid "Rus tili uchun shovrum rasmini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:48
+#: handlers/users/admin_showroom.py:92
 msgid "O'zbek tili uchun shovrum matnini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:58
+#: handlers/users/admin_showroom.py:102
 msgid "Rus tili uchun shovrum matnini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:68
+#: handlers/users/admin_showroom.py:112
 msgid "O'zbek tili uchun shovrum nomini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:78
+#: handlers/users/admin_showroom.py:122
 msgid "Rus tili uchun shovrum nomini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:88
+#: handlers/users/admin_showroom.py:132
 msgid "Shovrumning xaritadagi linkini kiriting."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:99
+#: handlers/users/admin_showroom.py:143
 msgid "Shovrumning qo'shildi."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:123
+#: handlers/users/admin_showroom.py:157
+msgid "Rus tili uchun diller rasmini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:167
+msgid "O'zbek tili uchun diller matnini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:177
+msgid "Rus tili uchun diller matnini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:187
+msgid "O'zbek tili uchun diller nomini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:197
+msgid "Rus tili uchun diller nomini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:207
+msgid "Dillerning xaritadagi linkini kiriting."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:218
+msgid "Diller qo'shildi."
+msgstr ""
+
+#: handlers/users/admin_showroom.py:242
 msgid "O'zbek tili uchun shovrumning yangi rasmini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:127
+#: handlers/users/admin_showroom.py:246
 msgid "Rus tili uchun shovrumning yangi rasmini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:176
+#: handlers/users/admin_showroom.py:295
 msgid "O'zbek tili uchun shovrumning yangi matnini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:180
+#: handlers/users/admin_showroom.py:299
 msgid "Rus tili uchun shovrumning yangi matnini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:229
+#: handlers/users/admin_showroom.py:348
 msgid "O'zbek tili uchun shovrumning yangi nomini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:233
+#: handlers/users/admin_showroom.py:352
 msgid "Rus tili uchun shovrumning yangi nomini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:243 handlers/users/admin_showroom.py:260
+#: handlers/users/admin_showroom.py:362 handlers/users/admin_showroom.py:379
 msgid "Nom yangilandi."
 msgstr ""
 
-#: handlers/users/admin_showroom.py:280
+#: handlers/users/admin_showroom.py:399
 msgid "Shovrum uchun yangi manzil linkini kiriting"
 msgstr ""
 
-#: handlers/users/admin_showroom.py:290
+#: handlers/users/admin_showroom.py:409
 msgid "Manzil yangilandi."
 msgstr ""
 
-#: handlers/users/admin_statistics.py:27
+#: handlers/users/admin_statistics.py:28
 msgid "Faol ko'nkurs yo'q"
 msgstr ""
 
-#: handlers/users/admin_statistics.py:72
+#: handlers/users/admin_statistics.py:73
 msgid "Aktiv konkurs mavjud emas."
 msgstr ""
 
-#: handlers/users/main.py:9
+#: handlers/users/main.py:10
 msgid ""
 "\n"
 "    Buyruqlar: \n"
@@ -332,15 +377,15 @@ msgid ""
 "    "
 msgstr ""
 
-#: handlers/users/post_like.py:30
+#: handlers/users/post_like.py:32
 msgid "Boshqa ishtorkchilarni ham ko'rish uchun yana tugmasini bosing."
 msgstr ""
 
-#: handlers/users/post_like.py:45
+#: handlers/users/post_like.py:48
 msgid "Boshqa qatnashuvchilar mavjud emas."
 msgstr ""
 
-#: handlers/users/post_like.py:53
+#: handlers/users/post_like.py:56
 msgid "Asosiy menyuga xush kelibsiz."
 msgstr ""
 
@@ -348,19 +393,19 @@ msgstr ""
 msgid "🤖 Asosiy menyuga xush kelibsiz."
 msgstr ""
 
-#: handlers/users/send_comp_post_user.py:23
+#: handlers/users/send_comp_post_user.py:24
 msgid "Siz rasmlarni yuborgansiz. ✅"
 msgstr ""
 
-#: handlers/users/send_comp_post_user.py:26
+#: handlers/users/send_comp_post_user.py:27
 msgid "Eng yaxshi ishlaringizdan na'muna jo'nating (rasm sifatida)."
 msgstr ""
 
-#: handlers/users/send_comp_post_user.py:30
+#: handlers/users/send_comp_post_user.py:31
 msgid "Avval kanalga a'zo bo'ling."
 msgstr ""
 
-#: handlers/users/send_comp_post_user.py:46
+#: handlers/users/send_comp_post_user.py:47
 msgid "Yuborgan rasmdagi ishingizga qisqacha ta'rif bering."
 msgstr ""
 
@@ -381,62 +426,94 @@ msgid ""
 "\n"
 msgstr ""
 
-#: handlers/users/send_comp_post_user.py:114
+#: handlers/users/send_comp_post_user.py:115
 msgid "Sizning rasmlaringiz qabul qilinmadi."
 msgstr ""
 
-#: handlers/users/send_post.py:16
+#: handlers/users/send_post.py:17
 msgid "Post uchun rasmni kiriting."
 msgstr ""
 
-#: handlers/users/send_post.py:26
+#: handlers/users/send_post.py:27
 msgid "Post uchun matnni kiriting."
 msgstr ""
 
-#: handlers/users/send_post.py:51
+#: handlers/users/send_post.py:37
+msgid "Post uchun pastki havolani kiriting."
+msgstr ""
+
+#: handlers/users/send_post.py:47
+msgid "Post uchun pastki tugmadagi matnni kiriting."
+msgstr ""
+
+#: handlers/users/send_post.py:79
 msgid "Habar barcha foydalanuvchilarga jo'natildi."
 msgstr ""
 
-#: handlers/users/send_post.py:64
+#: handlers/users/send_post.py:92
 msgid "Habar bekor qilindi."
 msgstr ""
 
-#: handlers/users/start.py:25
+#: handlers/users/start.py:26
 msgid "Assalomu alaykum. Siz bot boshqaruvchilaridan birisiz. 😊"
 msgstr ""
 
-#: handlers/users/start.py:52
+#: handlers/users/start.py:53
 msgid "Siz ro'yxatdan o'tgansiz."
 msgstr ""
 
-#: handlers/users/start.py:122
+#: handlers/users/start.py:119
 msgid "Siz muvofaqqiyatli ro'yxatdan o'tdingiz."
 msgstr ""
 
-#: handlers/users/start.py:147
-msgid "Rasm yuborilgan. ✅"
-msgstr ""
-
-#: handlers/users/start.py:149
-msgid "Rasm yuborilmagan. ❌"
-msgstr ""
-
-#: handlers/users/start.py:155
+#: handlers/users/start.py:152
 msgid "Kanalga a'zo bo'lgansiz. ✅"
+msgstr ""
+
+#: handlers/users/start.py:154
+msgid "Вы являетесь участником канала. ✅"
 msgstr ""
 
 #: handlers/users/start.py:157
 msgid "Kanalga a'zo bo'lmagansiz. ❌"
 msgstr ""
 
-#: handlers/users/user_menu.py:54 handlers/users/user_menu.py:57
+#: handlers/users/start.py:159
+msgid "Вы не являетесь участником канала. ❌"
+msgstr ""
+
+#: handlers/users/start.py:164
+msgid "Rasm yuborilgan. ✅"
+msgstr ""
+
+#: handlers/users/start.py:166
+msgid "Картинка отправлена. ✅"
+msgstr ""
+
+#: handlers/users/start.py:169
+msgid "Rasm yuborilmagan. ❌"
+msgstr ""
+
+#: handlers/users/start.py:171
+msgid "Картинка не отправлена. ❌"
+msgstr ""
+
+#: handlers/users/user_menu.py:55 handlers/users/user_menu.py:58
 msgid ""
 "Hozirda faol konkurslar mavjud emas. Tez orada yangi konkursimizni "
 "boshlaymiz."
 msgstr ""
 
-#: handlers/users/user_menu.py:86 handlers/users/user_menu.py:101
+#: handlers/users/user_menu.py:87 handlers/users/user_menu.py:114
 msgid "Bizning rasmiy diller va do'konlarimiz haqida:"
+msgstr ""
+
+#: handlers/users/user_menu.py:102
+msgid "Bizning rasmiy dillerlarimiz ro'yxati."
+msgstr ""
+
+#: handlers/users/user_menu.py:105
+msgid "Hozirda dillerlar mavjud emas."
 msgstr ""
 
 #: handlers/users/user_profile.py:59
@@ -480,7 +557,7 @@ msgid "Asosiy menyu ◀"
 msgstr ""
 
 #: keyboards/default/admins.py:42 keyboards/inline/admin_comp.py:42
-#: keyboards/inline/admin_showroom.py:78 keyboards/inline/users.py:12
+#: keyboards/inline/admin_showroom.py:140 keyboards/inline/users.py:12
 #: keyboards/inline/users.py:74
 msgid "Ortga ◀"
 msgstr ""
@@ -514,7 +591,7 @@ msgid "Asosiy menyu ⏹"
 msgstr ""
 
 #: keyboards/inline/admin_comp.py:10 keyboards/inline/admin_comp.py:32
-#: keyboards/inline/admin_showroom.py:63 keyboards/inline/admins.py:30
+#: keyboards/inline/admin_showroom.py:125 keyboards/inline/admins.py:30
 msgid "Rasmni o'zgartirish"
 msgstr ""
 
@@ -531,30 +608,42 @@ msgid "Sovg'alar 🎁"
 msgstr ""
 
 #: keyboards/inline/admin_comp.py:20 keyboards/inline/admin_comp.py:38
-#: keyboards/inline/admin_showroom.py:38 keyboards/inline/admin_showroom.py:75
-#: keyboards/inline/admins.py:34
+#: keyboards/inline/admin_showroom.py:49 keyboards/inline/admin_showroom.py:77
+#: keyboards/inline/admin_showroom.py:137 keyboards/inline/admins.py:34
 msgid "O'zbek 🇺🇿"
 msgstr ""
 
 #: keyboards/inline/admin_comp.py:21 keyboards/inline/admin_comp.py:39
-#: keyboards/inline/admin_showroom.py:34 keyboards/inline/admin_showroom.py:75
-#: keyboards/inline/admins.py:34
+#: keyboards/inline/admin_showroom.py:45 keyboards/inline/admin_showroom.py:73
+#: keyboards/inline/admin_showroom.py:137 keyboards/inline/admins.py:34
 msgid "Ruscha 🇷🇺"
 msgstr ""
 
-#: keyboards/inline/admin_showroom.py:12 keyboards/inline/admin_showroom.py:30
+#: keyboards/inline/admin_showroom.py:12 keyboards/inline/admin_showroom.py:41
 msgid "Shovrum qo'shish ➕"
 msgstr ""
 
-#: keyboards/inline/admin_showroom.py:65 keyboards/inline/admins.py:31
+#: keyboards/inline/admin_showroom.py:23 keyboards/inline/admin_showroom.py:69
+msgid "Diller qo'shish ➕"
+msgstr ""
+
+#: keyboards/inline/admin_showroom.py:53
+msgid "Dillerlarga o'tish ▶"
+msgstr ""
+
+#: keyboards/inline/admin_showroom.py:80 keyboards/inline/admin_showroom.py:96
+msgid "Shovrumlarga qaytish ◀"
+msgstr ""
+
+#: keyboards/inline/admin_showroom.py:127 keyboards/inline/admins.py:31
 msgid "Matnni o'zgartirish"
 msgstr ""
 
-#: keyboards/inline/admin_showroom.py:69
+#: keyboards/inline/admin_showroom.py:131
 msgid "Linkni o'zgartirish"
 msgstr ""
 
-#: keyboards/inline/admin_showroom.py:71
+#: keyboards/inline/admin_showroom.py:133
 msgid "Nomni o'zgartirish"
 msgstr ""
 
