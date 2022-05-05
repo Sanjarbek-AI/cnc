@@ -41,11 +41,13 @@ async def start_users(message: types.Message):
         args = int(args)
 
         post_data = await get_user_post(args)
-
-        link = f"https://t.me/cncele_bot?start={args}"
-        await message.answer_photo(photo=post_data["images"][0],
-                                   reply_markup=await post_like(args, link))
-
+        if post_data:
+            link = f"https://t.me/cncele_bot?start={args}"
+            await message.answer_photo(photo=post_data["images"][0],
+                                       reply_markup=await post_like(args, link))
+        else:
+            text = "Xa'to havoladan foydalandingiz !"
+            await message.answer(text, reply_markup=await users_main_menu())
     else:
         user = await get_user(message.from_user.id)
         if user:
