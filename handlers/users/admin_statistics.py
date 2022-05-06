@@ -10,7 +10,7 @@ from loader import dp, _
 from main import config
 from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user, \
     get_top_users
-from utils.db_api.user_posts import get_all_posts_users
+from utils.db_api.user_posts import get_all_posts_users, get_post_like
 
 
 async def return_statistics():
@@ -88,11 +88,12 @@ async def export_excel(call: CallbackQuery):
                     new_posts.append(user_post)
             text = """**********************************"""
             for post in new_posts[::-1][-9:]:
+                post_like_data = await get_post_like(post["user_post_id"])
                 user = await get_user(post["telegram_id"])
                 text += f"""
     IF: {user["full_name"]}              
     Raqam: {user["phone_number"]}
-    Like: {post["like"]}  \n   
+    Like: {len(post_like_data)}  \n   
 **********************************
         """
             await call.message.answer(text=text, reply_markup=await admin_main_menu())
