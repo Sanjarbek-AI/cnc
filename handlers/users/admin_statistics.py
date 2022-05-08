@@ -3,13 +3,12 @@ from aiogram.types import InputFile
 from aiogram.types.callback_query import CallbackQuery
 
 from filters.private_chat import IsPrivate
-from handlers.users.excel_users import export_users_registered
+from handlers.users.excel_users import export_users_registered, export_users_posts
 from keyboards.default.admins import admin_main_menu
 from keyboards.inline.users import export_excel_users
 from loader import dp, _
 from main import config
-from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user, \
-    get_top_users
+from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user
 from utils.db_api.user_posts import get_all_posts_users, get_post_like
 
 
@@ -80,23 +79,53 @@ async def export_excel(call: CallbackQuery):
     if comp:
         try:
             active_posts = await get_all_posts_users(comp["id"])
-            id_list = [post["id"] for post in active_posts]
-            top_users_posts = await get_top_users()
             new_posts = list()
-            for user_post in top_users_posts:
-                if user_post["user_post_id"] in id_list:
-                    new_posts.append(user_post)
-            text = """**********************************"""
-            for post in new_posts[::-1][-9:]:
-                post_like_data = await get_post_like(post["user_post_id"])
-                user = await get_user(post["telegram_id"])
-                text += f"""
-    IF: {user["full_name"]}              
-    Raqam: {user["phone_number"]}
-    Like: {len(post_like_data)}  \n   
-**********************************
-        """
+            for user_post in active_posts:
+                user = await get_user(user_post["telegram_id"])
+                post_like_data = await get_post_like(user_post["id"])
+                new_posts.append({
+                    "full_name": user["full_name"],
+                    "phone_number": user["phone_number"],
+                    "location": user["location"],
+                    "like": len(post_like_data)
+                })
+            excel_file = await export_users_posts(new_posts)
+            with open("users_like.xlsx", "wb") as binary_file:
+                binary_file.write(excel_file)
+            export_file = InputFile(path_or_bytesio="users_like.xlsx")
+            await call.message.reply_document(export_file)
+
+        except Exception as exc:
+            print(exc)
+            text = "Botda nosozlik bor."
             await call.message.answer(text=text, reply_markup=await admin_main_menu())
+    else:
+        text = "Faol ko'nkur mavjud emas."
+        await call.message.answer(text=text, reply_markup=await admin_main_menu())
+
+
+@dp.callback_query_handler(text="see_all_users_post", chat_id=config.ADMINS)
+async def export_excel(call: CallbackQuery):
+    comp = await get_competitions()
+    if comp:
+        try:
+            active_posts = await get_all_posts_users(comp["id"])
+            for user_post in active_posts:
+                user = await get_user(user_post["telegram_id"])
+                post_like_data = await get_post_like(user_post["id"])
+                try:
+                    caption = f"""
+IF: {user["full_name"]}
+Number: {user["phone_number"]}
+Location: {user["location"]}
+Like: {len(post_like_data)}
+                    """
+                    await call.message.answer_photo(photo=user_post["images"][0], caption=caption)
+                except Exception as exc:
+                    print(exc)
+                    text = "Botda nosozlik bor."
+                    await call.message.answer(text=text, reply_markup=await admin_main_menu())
+
         except Exception as exc:
             print(exc)
             text = "Botda nosozlik bor."

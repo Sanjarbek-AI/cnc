@@ -14,7 +14,7 @@ from main import config
 from main.config import CHANNELS
 from states.admins import Language
 from states.users import Register
-from utils.db_api.commands import register, get_competitions, get_user, register_start
+from utils.db_api.commands import register, get_competitions, get_user, register_start, get_user_active
 from utils.db_api.user_posts import get_comp_user, get_user_post
 from utils.misc.checking_user_membership import check
 
@@ -49,7 +49,7 @@ async def start_users(message: types.Message):
             text = "Xa'to havoladan foydalandingiz !"
             await message.answer(text, reply_markup=await users_main_menu())
     else:
-        user = await get_user(message.from_user.id)
+        user = await get_user_active(message.from_user.id)
         if user:
             text = _("Siz ro'yxatdan o'tgansiz.")
             await message.answer(text, reply_markup=await users_main_menu())

@@ -11,6 +11,15 @@ async def get_user(telegram_id):
         return False
 
 
+async def get_user_active(telegram_id):
+    try:
+        query = users.select().where(users.c.telegram_id == telegram_id, users.c.status == UserStatus.active)
+        return await database.fetch_one(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_users_list(id_list):
     try:
         query = users.select().where(users.c.telegram_id in id_list)
@@ -60,6 +69,25 @@ async def register(message, state):
             created_at=message.date,
             updated_at=message.date
         )
+        await database.execute(query=query)
+        return True
+    except Exception as exc:
+        print(exc)
+        return False
+
+
+async def update_user_status(message, state):
+    try:
+        data = await state.get_data()
+        query = users.update().values(
+            telegram_id=data.get("telegram_id"),
+            full_name=data.get("full_name"),
+            location=data.get("location"),
+            language=data.get("language"),
+            phone_number=data.get("phone_number"),
+            status=UserStatus.active,
+            updated_at=message.date
+        ).where(users.c.telegram_id == data.get("telegram_id"))
         await database.execute(query=query)
         return True
     except Exception as exc:
