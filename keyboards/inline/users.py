@@ -66,6 +66,21 @@ async def user_profile():
     return user
 
 
+delete_user_post_callback = CallbackData("delete_post", "act", "post_id")
+
+
+async def delete_user_post(post_id):
+    admin_answer = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text="O'chirish 🗑",
+                                     callback_data=delete_user_post_callback.new(act="delete_post", post_id=post_id)),
+            ]
+        ]
+    )
+    return admin_answer
+
+
 async def showroom_menu_user(showroom_link):
     user = InlineKeyboardMarkup(
         inline_keyboard=[

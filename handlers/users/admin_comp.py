@@ -1,12 +1,12 @@
 from aiogram import types
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
-from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
 from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, admin_main_menu
 from keyboards.inline.admin_comp import update_comp_def, comp_yes_or_no
 from keyboards.inline.admins import new_comp_add, new_comp_ask, callback_comp_ask
+from keyboards.inline.users import delete_user_post_callback
 from loader import dp, _, bot
 from main import config
 from states.admins import AddCompetition
@@ -160,3 +160,14 @@ async def stop_comp(call: CallbackQuery):
     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
     text = _("Konkurs to'xtatilmadi.")
     await call.message.answer(text, reply_markup=await admin_main_menu())
+
+
+@dp.callback_query_handler(delete_user_post_callback.filter(act="delete_post"), chat_id=config.ADMINS)
+async def delete_post_def(call: CallbackQuery, callback_data: dict):
+    post_id = int(callback_data.get("post_id"))
+    if await delete_post(post_id):
+        text = _("Post o'chrildi.")
+        await call.message.answer(text, reply_markup=await admin_main_menu())
+    else:
+        text = _("Botda xatolik yuz berdi !!!")
+        await call.message.answer(text, reply_markup=await admin_main_menu())

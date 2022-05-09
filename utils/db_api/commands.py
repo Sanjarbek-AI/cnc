@@ -267,3 +267,13 @@ async def add_dealer(message, state):
     except Exception as exc:
         print(exc)
         return False
+
+
+async def delete_post(post_id):
+    try:
+        query = user_post.delete().where(user_post.c.id == post_id)
+        await database.execute(query=query)
+        return True
+    except Exception as exc:
+        print(exc)
+        return False

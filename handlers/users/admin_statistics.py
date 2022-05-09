@@ -5,7 +5,7 @@ from aiogram.types.callback_query import CallbackQuery
 from filters.private_chat import IsPrivate
 from handlers.users.excel_users import export_users_registered, export_users_posts
 from keyboards.default.admins import admin_main_menu
-from keyboards.inline.users import export_excel_users
+from keyboards.inline.users import export_excel_users, delete_user_post
 from loader import dp, _
 from main import config
 from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user
@@ -120,7 +120,8 @@ Number: {user["phone_number"]}
 Location: {user["location"]}
 Like: {len(post_like_data)}
                     """
-                    await call.message.answer_photo(photo=user_post["images"][0], caption=caption)
+                    await call.message.answer_photo(photo=user_post["images"][0], caption=caption,
+                                                    reply_markup=await delete_user_post(user_post["id"]))
                 except Exception as exc:
                     print(exc)
                     text = "Botda nosozlik bor."
