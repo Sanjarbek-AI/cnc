@@ -24,8 +24,11 @@ class AddContact(StatesGroup):
 
 
 class SendPost(StatesGroup):
+    image_or_file = State()
     image = State()
+    file = State()
     text = State()
+    text_wait = State()
     link = State()
     button_text = State()
     waiting = State()
@@ -77,6 +80,7 @@ class AddDealer(StatesGroup):
     name_uz = State()
     name_ru = State()
     link = State()
+
 
 class UpdateProfile(StatesGroup):
     full_name = State()

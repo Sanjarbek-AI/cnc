@@ -62,6 +62,33 @@ async def send_post_def():
     return send_post
 
 
+async def image_or_file():
+    send_post = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text=_("Rasm"), callback_data="send_post_image"),
+                InlineKeyboardButton(text=_("File"), callback_data="send_post_file"),
+            ],
+            [
+                InlineKeyboardButton(text=_("Hech narsa"), callback_data="nothing")
+            ]
+        ]
+    )
+    return send_post
+
+
+async def text_or_not():
+    send_post = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text=_("Ha"), callback_data="send_post_text_yes"),
+                InlineKeyboardButton(text=_("Yo'q"), callback_data="send_post_text_no"),
+            ]
+        ]
+    )
+    return send_post
+
+
 callback_comp_ask = CallbackData("comp_yes", "act", "comp_id")
 
 

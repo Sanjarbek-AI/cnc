@@ -1,11 +1,13 @@
+import validators
 from aiogram import types
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types.callback_query import CallbackQuery
+from aiogram.types.message import ContentType, ContentTypes
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
 
 from filters.private_chat import IsPrivate
 from keyboards.default.admins import back_admin_main_menu, admin_main_menu
-from keyboards.inline.admins import send_post_def, send_admin_post_all
+from keyboards.inline.admins import send_post_def, send_admin_post_all, image_or_file, text_or_not
 from loader import dp, _, bot
 from main import config
 from states.admins import SendPost
@@ -14,18 +16,65 @@ from utils.db_api.commands import get_users
 
 @dp.message_handler(IsPrivate(), text=["Post Jo'natish ⏫", "Опубликовать Отправить ⏫"], chat_id=config.ADMINS)
 async def send_post(message: types.Message):
+    text = "Rasm yoki file jo'natasizmi ? "
+    # text = _("Post uchun rasmni kiriting.")
+    await message.answer(text, reply_markup=await image_or_file())
+    await SendPost.image_or_file.set()
+
+
+@dp.callback_query_handler(state=SendPost.image_or_file, chat_id=config.ADMINS, text="send_post_image")
+async def send_post(call: CallbackQuery):
     text = _("Post uchun rasmni kiriting.")
-    await message.answer(text, reply_markup=await back_admin_main_menu())
+    await call.message.answer(text, reply_markup=await back_admin_main_menu())
     await SendPost.image.set()
 
 
-@dp.message_handler(state=SendPost.image, chat_id=config.ADMINS, content_types=types.ContentTypes.PHOTO)
+@dp.message_handler(state=SendPost.image, chat_id=config.ADMINS, content_types=ContentType.PHOTO)
 async def send_post(message: types.Message, state: FSMContext):
     await state.update_data({
-        "image": message.photo[-1].file_id
+        "image": message.photo[-1].file_id,
+        "video": False
     })
+
+    text = _("Post uchun matn kiritasimi ?")
+    await message.answer(text, reply_markup=await text_or_not())
+    await SendPost.text_wait.set()
+
+
+@dp.callback_query_handler(state=SendPost.image_or_file, chat_id=config.ADMINS, text="send_post_file")
+async def send_post(call: CallbackQuery):
+    text = _("Post uchun video kiriting.")
+    await call.message.answer(text, reply_markup=await back_admin_main_menu())
+    await SendPost.file.set()
+
+
+@dp.message_handler(state=SendPost.file, chat_id=config.ADMINS, content_types=ContentTypes.VIDEO)
+async def send_post(message: types.Message, state: FSMContext):
+    await state.update_data({
+        "video": message.video.file_id,
+        "image": False
+    })
+
+    text = _("Post uchun matn kiritasimi ?")
+    await message.answer(text, reply_markup=await text_or_not())
+    await SendPost.text_wait.set()
+
+
+@dp.callback_query_handler(state=SendPost.image_or_file, chat_id=config.ADMINS, text="nothing")
+async def send_post(call: CallbackQuery, state: FSMContext):
+    await state.update_data({
+        "video": False,
+        "image": False,
+    })
+    text = _("Post uchun matn kiritasimi ?")
+    await call.message.answer(text, reply_markup=await text_or_not())
+    await SendPost.text_wait.set()
+
+
+@dp.callback_query_handler(state=SendPost.text_wait, chat_id=config.ADMINS, text="send_post_text_yes")
+async def send_post(call: CallbackQuery):
     text = _("Post uchun matnni kiriting.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
+    await call.message.answer(text, reply_markup=await back_admin_main_menu())
     await SendPost.text.set()
 
 
@@ -39,14 +88,36 @@ async def send_post(message: types.Message, state: FSMContext):
     await SendPost.link.set()
 
 
+@dp.callback_query_handler(state=SendPost.text_wait, chat_id=config.ADMINS, text="send_post_text_no")
+async def send_post(call: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    if data.get('image') == False and data.get('video') == False:
+        text = _("Post uchun hech narsa kiritilmadi.")
+        await call.message.answer(text, reply_markup=await admin_main_menu())
+        await state.finish()
+    else:
+        await state.update_data({
+            "text": False
+        })
+        text = _("Post uchun pastki havolani kiriting.")
+        await call.message.answer(text, reply_markup=ReplyKeyboardRemove())
+        await SendPost.link.set()
+
+
 @dp.message_handler(state=SendPost.link, chat_id=config.ADMINS)
 async def send_post(message: types.Message, state: FSMContext):
-    await state.update_data({
-        "link": message.text
-    })
-    text = _("Post uchun pastki tugmadagi matnni kiriting.")
-    await message.answer(text, reply_markup=ReplyKeyboardRemove())
-    await SendPost.button_text.set()
+    link = validators.url(message.text)
+    if link:
+        await state.update_data({
+            "link": message.text
+        })
+        text = _("Post uchun pastki tugmadagi matnni kiriting.")
+        await message.answer(text, reply_markup=ReplyKeyboardRemove())
+        await SendPost.button_text.set()
+    else:
+        text = _("Havola noto'g'ri kiritildi.")
+        await message.answer(text, reply_markup=ReplyKeyboardRemove())
+        await SendPost.link.set()
 
 
 @dp.message_handler(state=SendPost.button_text, chat_id=config.ADMINS)
@@ -56,8 +127,28 @@ async def send_post(message: types.Message, state: FSMContext):
     })
     data = await state.get_data()
 
-    await message.answer_photo(data.get("image"), caption=data.get("text"),
-                               reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    if data.get('image') and data.get("text"):
+        await message.answer_photo(data.get("image"), caption=data.get("text"),
+                                   reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    elif data.get('image') and data.get('text') == False:
+        await message.answer_photo(data.get("image"),
+                                   reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    elif data.get('image') == False and data.get('text'):
+        await message.answer(text=data.get('text'),
+                             reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    elif data.get('video') and data.get("text"):
+        await message.answer_video(data.get("video"), caption=data.get("text"),
+                                   reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    elif data.get('video') == False and data.get('text'):
+        await message.answer_video(video=data.get('video'),
+                                   reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+    elif data.get('video') and data.get('text') == False:
+        await message.answer(text=data.get('text'),
+                             reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
+
+    elif data.get('image') == False and data.get('video') == False and data.get('text') == False:
+        await message.answer("Siz hech qanday parametrlarni kiritmadingiz.", reply_markup=await admin_main_menu())
+
     answer = "Jo'natishni hohlaysizmi ?"
     await message.answer(answer, reply_markup=await send_post_def())
     await SendPost.waiting.set()
@@ -67,13 +158,57 @@ async def send_post(message: types.Message, state: FSMContext):
 async def send_post_yes(call: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     users = await get_users()
+    image = data.get('image')
+    video = data.get('video')
+    text = data.get('text')
+
     try:
-        try:
-            for user in users:
-                await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"),
-                                     reply_markup=await send_admin_post_all(data.get("button_text"), data.get("link")))
-        except Exception as exc:
-            print(exc)
+        if image and text and video == False:
+            try:
+                for user in users:
+                    await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"),
+                                         reply_markup=await send_admin_post_all(data.get("button_text"),
+                                                                                data.get("link")))
+            except Exception as exc:
+                print(exc)
+        elif text == False and image and video == False:
+            try:
+                for user in users:
+                    await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"),
+                                         reply_markup=await send_admin_post_all(data.get("button_text"),
+                                                                                data.get("link")))
+            except Exception as exc:
+                print(exc)
+
+        elif text == False and video and image == False:
+            try:
+                for user in users:
+                    await bot.send_video(chat_id=user["telegram_id"], video=data.get("video"),
+                                         reply_markup=await send_admin_post_all(data.get("button_text"),
+                                                                                data.get("link")))
+            except Exception as exc:
+                print(exc)
+
+        elif video and text and image == False:
+            try:
+                for user in users:
+                    await bot.send_video(chat_id=user["telegram_id"], video=data.get("video"), caption=data.get("text"),
+                                         reply_markup=await send_admin_post_all(data.get("button_text"),
+                                                                                data.get("link")))
+            except Exception as exc:
+                print(exc)
+
+        elif video == False and image == False and text:
+            try:
+                for user in users:
+                    await bot.send_message(chat_id=user["telegram_id"], text=data.get("text"),
+                                           reply_markup=await send_admin_post_all(data.get("button_text"),
+                                                                                  data.get("link")))
+            except Exception as exc:
+                print(exc)
+        else:
+            print("************************")
+            pass
 
         await state.finish()
         text = _("Habar barcha foydalanuvchilarga jo'natildi.")
