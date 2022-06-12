@@ -67,7 +67,7 @@ async def image_or_file():
         inline_keyboard=[
             [
                 InlineKeyboardButton(text=_("Rasm"), callback_data="send_post_image"),
-                InlineKeyboardButton(text=_("File"), callback_data="send_post_file"),
+                InlineKeyboardButton(text=_("Video"), callback_data="send_post_file"),
             ],
             [
                 InlineKeyboardButton(text=_("Hech narsa"), callback_data="nothing")
