@@ -21,7 +21,7 @@ from utils.misc.checking_user_membership import check
 
 @dp.message_handler(IsPrivate(), chat_id=config.ADMINS, commands="start")
 async def start_admin(message: types.Message):
-    if await get_user(message.from_user.id):
+    if await get_user_active(message.from_user.id):
         text = _("Assalomu alaykum. Siz bot boshqaruvchilaridan birisiz. 😊")
         await message.answer(text, reply_markup=await admin_main_menu())
     else:

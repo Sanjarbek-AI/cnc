@@ -20,6 +20,15 @@ async def get_user_active(telegram_id):
         return False
 
 
+async def get_user_active(telegram_id):
+    try:
+        query = users.select().where(users.c.telegram_id == telegram_id, users.c.status == UserStatus.active)
+        return await database.fetch_one(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_users_list(id_list):
     try:
         query = users.select().where(users.c.telegram_id in id_list)

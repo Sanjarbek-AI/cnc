@@ -12,7 +12,7 @@ from main.constants import UserPostStatus
 from states.users import UserSendPost, RegisterLike
 from utils.db_api.commands import get_competitions, get_user, get_user_active
 from utils.db_api.user_posts import add_posts, get_comp_user, update_user_post_status, get_user_post, \
-    get_user_post_by_id
+    get_user_post_by_id, delete_user_post_admin_no
 from utils.misc.checking_user_membership import check
 
 
@@ -131,6 +131,7 @@ async def admin_answer_no(call: CallbackQuery, callback_data: dict):
             text = _("Sizning rasmlaringiz qabul qilinmadi.")
             await bot.send_message(chat_id=post["telegram_id"], text=text,
                                    reply_markup=await users_main_menu())
+            await delete_user_post_admin_no(post_id)
 
             text = "Qabul qilinmadi ❌ ❌ ❌"
             await bot.send_message(chat_id="-1001538496752", text=text)

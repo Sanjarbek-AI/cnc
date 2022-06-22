@@ -49,6 +49,16 @@ async def get_user_post_by_id(post_id):
         return False
 
 
+async def delete_user_post_admin_no(post_id):
+    try:
+        query = user_post.delete().where(user_post.c.id == post_id)
+        await database.execute(query=query)
+        return True
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_user_post_like(post_id):
     try:
         query = posts_and_like.select().where(posts_and_like.c.user_post_id == post_id,
@@ -115,7 +125,7 @@ async def get_all_posts(comp_id):
 
 async def get_all_posts_users(comp_id):
     try:
-        query = user_post.select().where(user_post.c.comp_id == comp_id)
+        query = user_post.select().where(user_post.c.comp_id == comp_id, user_post.c.status == UserPostStatus.accepted)
         return await database.fetch_all(query=query)
     except Exception as exc:
         print(exc)
