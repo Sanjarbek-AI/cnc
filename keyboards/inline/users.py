@@ -129,3 +129,15 @@ async def post_like(post_id, link):
         ]
     )
     return admin_answer
+
+
+async def user_electric_status():
+    status = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text=_("Ha ✅"), callback_data="1"),
+                InlineKeyboardButton(text=_("Yo'q ❌"), callback_data="0")
+            ]
+        ]
+    )
+    return status

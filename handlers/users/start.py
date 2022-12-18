@@ -8,13 +8,14 @@ from keyboards.default.admins import contact_def, admin_main_menu
 from keyboards.default.users import users_main_menu
 from keyboards.inline.admins import languages
 from keyboards.inline.locations import locations_def
-from keyboards.inline.users import comp_menu_def, post_like
-from loader import dp, _
+from keyboards.inline.users import comp_menu_def, post_like, user_electric_status
+from loader import dp, _, bot
 from main import config
 from main.config import CHANNELS
 from states.admins import Language
 from states.users import Register
-from utils.db_api.commands import register, get_competitions, get_user, register_start, get_user_active
+from utils.db_api.commands import register, get_competitions, get_user, register_start, get_user_active, \
+    update_user_electric_status
 from utils.db_api.user_posts import get_comp_user, get_user_post
 from utils.misc.checking_user_membership import check
 
@@ -50,13 +51,34 @@ async def start_users(message: types.Message):
             await message.answer(text, reply_markup=await users_main_menu())
     else:
         user = await get_user_active(message.from_user.id)
-        if user:
+        if user and user['electric_status'] is None:
+            text = _("Siz elektrik bo'lib ishlaysizmi ?")
+            await message.answer(text, reply_markup=await user_electric_status())
+            await Register.electric_status_1.set()
+
+        elif user and user['electric_status']:
             text = _("Siz ro'yxatdan o'tgansiz.")
             await message.answer(text, reply_markup=await users_main_menu())
+
         else:
             text = "Iltimos, tilni tanlang. 🇺🇿 \nВыберите язык. 🇷🇺"
             await message.answer(text, reply_markup=languages)
             await Register.language.set()
+
+
+@dp.callback_query_handler(state=Register.electric_status_1)
+async def profile(call: CallbackQuery, state: FSMContext):
+    user = await get_user(call.message.chat.id)
+    if await update_user_electric_status(call.message, int(call.data)):
+        if user['phone_number']:
+            text = _("Siz muvofaqqiyatli ro'yxatdan o'tdingiz.")
+            await call.message.answer(text, reply_markup=await users_main_menu())
+            await state.finish()
+        else:
+            text = "Iltimos, Telefon raqamingizni kiriting."
+            await call.message.answer(text, reply_markup=await contact_def())
+            await Register.phone_number.set()
+    await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
 
 
 @dp.callback_query_handler(state=Register.language)
@@ -81,19 +103,6 @@ async def full_name(message: types.Message, state: FSMContext):
     await Register.phone_number.set()
 
 
-# @dp.message_handler(state=Register.phone_number)
-# async def get_phone_number(message: types.Message, state: FSMContext):
-#     if await is_valid(message.text):
-#         await state.update_data({
-#             "phone_number": message.text
-#         })
-#         text = "Asosiy ish hududingizni tanlang."
-#         await message.answer(text, reply_markup=await locations_def())
-#         await Register.location.set()
-#     else:
-#         text = "Iltimos telefon raqamingizni tog'ri kiriting !"
-#         await message.answer(text)
-
 @dp.message_handler(state=Register.phone_number)
 async def get_phone_number(message: types.Message, state: FSMContext):
     text = "Iltimos tugmadan foydalaning."
@@ -106,8 +115,19 @@ async def get_phone_number(message: types.Message, state: FSMContext):
         "phone_number": message.contact.phone_number
     })
 
+    text = "Siz elektrik bo'lib ishlaysizmi ?"
+    await message.answer(text, reply_markup=await user_electric_status())
+    await Register.electric_status_2.set()
+
+
+@dp.callback_query_handler(state=Register.electric_status_2)
+async def electric_status(call: CallbackQuery, state: FSMContext):
+    await state.update_data({
+        "electric_status": int(call.data),
+    })
+
     text = "Asosiy ish hududingizni tanlang."
-    await message.answer(text, reply_markup=await locations_def())
+    await call.message.answer(text, reply_markup=await locations_def())
     await Register.location.set()
 
 
