@@ -20,15 +20,6 @@ async def get_user_active(telegram_id):
         return False
 
 
-async def get_user_active(telegram_id):
-    try:
-        query = users.select().where(users.c.telegram_id == telegram_id, users.c.status == UserStatus.active)
-        return await database.fetch_one(query=query)
-    except Exception as exc:
-        print(exc)
-        return False
-
-
 async def get_users_list(id_list):
     try:
         query = users.select().where(users.c.telegram_id in id_list)
@@ -74,6 +65,7 @@ async def register(message, state):
             location=data.get("location"),
             language=data.get("language"),
             phone_number=data.get("phone_number"),
+            electric_status=data.get("electric_status"),
             status=UserStatus.active,
             created_at=message.date,
             updated_at=message.date
@@ -281,6 +273,19 @@ async def add_dealer(message, state):
 async def delete_post(post_id):
     try:
         query = user_post.delete().where(user_post.c.id == post_id)
+        await database.execute(query=query)
+        return True
+    except Exception as exc:
+        print(exc)
+        return False
+
+
+async def update_user_electric_status(message, electric_status):
+    try:
+        query = users.update().values(
+            electric_status=electric_status,
+            updated_at=message.date
+        ).where(users.c.telegram_id == message.chat.id)
         await database.execute(query=query)
         return True
     except Exception as exc:

@@ -1,3 +1,5 @@
+import time
+
 import validators
 from aiogram import types
 from aiogram.dispatcher.storage import FSMContext
@@ -163,49 +165,54 @@ async def send_post_yes(call: CallbackQuery, state: FSMContext):
     text = data.get('text')
 
     try:
-        if image and text and video == False:
-            try:
-                for user in users:
+        if image and text and video is False:
+            for user in users:
+                try:
+                    time.sleep(0.2)
                     await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"), caption=data.get("text"),
                                          reply_markup=await send_admin_post_all(data.get("button_text"),
                                                                                 data.get("link")))
-            except Exception as exc:
-                print(exc)
-        elif text == False and image and video == False:
-            try:
-                for user in users:
+                except Exception as exc:
+                    print(exc)
+        elif text is False and image and video is False:
+            for user in users:
+                try:
+                    time.sleep(0.2)
                     await bot.send_photo(chat_id=user["telegram_id"], photo=data.get("image"),
                                          reply_markup=await send_admin_post_all(data.get("button_text"),
                                                                                 data.get("link")))
-            except Exception as exc:
-                print(exc)
+                except Exception as exc:
+                    print(exc)
 
-        elif text == False and video and image == False:
-            try:
-                for user in users:
+        elif text is False and video and image is False:
+            for user in users:
+                try:
+                    time.sleep(0.2)
                     await bot.send_video(chat_id=user["telegram_id"], video=data.get("video"),
                                          reply_markup=await send_admin_post_all(data.get("button_text"),
                                                                                 data.get("link")))
-            except Exception as exc:
-                print(exc)
+                except Exception as exc:
+                    print(exc)
 
-        elif video and text and image == False:
-            try:
-                for user in users:
+        elif video and text and image is False:
+            for user in users:
+                try:
+                    time.sleep(0.2)
                     await bot.send_video(chat_id=user["telegram_id"], video=data.get("video"), caption=data.get("text"),
                                          reply_markup=await send_admin_post_all(data.get("button_text"),
                                                                                 data.get("link")))
-            except Exception as exc:
-                print(exc)
+                except Exception as exc:
+                    print(exc)
 
-        elif video == False and image == False and text:
-            try:
-                for user in users:
+        elif video is False and image is False and text:
+            for user in users:
+                try:
+                    time.sleep(0.2)
                     await bot.send_message(chat_id=user["telegram_id"], text=data.get("text"),
                                            reply_markup=await send_admin_post_all(data.get("button_text"),
                                                                                   data.get("link")))
-            except Exception as exc:
-                print(exc)
+                except Exception as exc:
+                    print(exc)
         else:
             print("************************")
             pass
