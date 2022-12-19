@@ -21,6 +21,7 @@ async def export_excel_users():
         inline_keyboard=[
             [
                 InlineKeyboardButton(text=_("Excel olish (ro'yxatdan o'tganlar)"), callback_data="registered_users"),
+                InlineKeyboardButton(text=_("Excel olish ( elektriklar )"), callback_data="registered_electric_users"),
             ]
         ]
     )
