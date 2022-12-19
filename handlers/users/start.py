@@ -56,7 +56,8 @@ async def start_users(message: types.Message):
             await message.answer(text, reply_markup=await user_electric_status())
             await Register.electric_status_1.set()
 
-        elif user and user['electric_status']:
+        elif user:
+            print("****")
             text = _("Siz ro'yxatdan o'tgansiz.")
             await message.answer(text, reply_markup=await users_main_menu())
 
