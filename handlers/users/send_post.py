@@ -163,7 +163,8 @@ async def send_post_yes(call: CallbackQuery, state: FSMContext):
     image = data.get('image')
     video = data.get('video')
     text = data.get('text')
-
+    text_new = _("Habar barcha foydalanuvchilarga yuborilmoqda...")
+    await call.message.answer(text_new)
     try:
         if image and text and video is False:
             for user in users:

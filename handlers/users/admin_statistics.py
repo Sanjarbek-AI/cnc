@@ -8,7 +8,8 @@ from keyboards.default.admins import admin_main_menu
 from keyboards.inline.users import export_excel_users, delete_user_post
 from loader import dp, _
 from main import config
-from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user
+from utils.db_api.commands import get_showrooms, get_users, get_users_status_false, get_competitions, get_user, \
+    get_electric_users
 from utils.db_api.user_posts import get_all_posts_users, get_post_like
 
 
@@ -134,3 +135,14 @@ Like: {len(post_like_data)}
     else:
         text = "Faol ko'nkur mavjud emas."
         await call.message.answer(text=text, reply_markup=await admin_main_menu())
+
+
+@dp.callback_query_handler(text="registered_electric_users", chat_id=config.ADMINS)
+async def export_excel(call: CallbackQuery):
+    users = await get_electric_users()
+    excel_file = await export_users_registered(users)
+
+    with open("users_registered.xlsx", "wb") as binary_file:
+        binary_file.write(excel_file)
+    export_file = InputFile(path_or_bytesio="users_registered.xlsx")
+    await call.message.reply_document(export_file)

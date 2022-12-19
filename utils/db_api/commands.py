@@ -38,6 +38,15 @@ async def get_users():
         return False
 
 
+async def get_electric_users():
+    try:
+        query = users.select().where(users.c.electric_status == 1)
+        return await database.fetch_all(query=query)
+    except Exception as exc:
+        print(exc)
+        return False
+
+
 async def get_top_users():
     try:
         query = posts_and_like.select().where().order_by('like')

@@ -17,9 +17,10 @@ async def export_users_registered(data):
     ws.column_dimensions["B"].width = 20
     ws.column_dimensions["C"].width = 20
     ws.column_dimensions["D"].width = 20
+    ws.column_dimensions["E"].width = 20
 
     # creating list for excel file column headers
-    headings = ["Ism Familiya", "Telefon raqam", "Manzil", "Ro'xatdan o'tgan vaqti"]
+    headings = ["Ism Familiya", "Telefon raqam", "Manzil", "Ro'xatdan o'tgan vaqti", "Elektrikmi"]
     ws.append(headings)
 
     # changing column header text to bold
@@ -47,6 +48,10 @@ async def export_users_registered(data):
         current = ws[f"D{i}"]
         current.alignment = Alignment(horizontal='center', vertical='center')
         ws[f"D{i}"].value = str(user["created_at"])[0:19]
+
+        current = ws[f"E{i}"]
+        current.alignment = Alignment(horizontal='center', vertical='center')
+        ws[f"E{i}"].value = str(user["electric_status"])
 
         i += 1
     else:
