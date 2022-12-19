@@ -13,6 +13,7 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("language", sqlalchemy.String, nullable=True),
     sqlalchemy.Column("telegram_id", sqlalchemy.BigInteger),
     sqlalchemy.Column("phone_number", sqlalchemy.String, nullable=True),
+    sqlalchemy.Column("electric_status", sqlalchemy.Integer, nullable=True),
     sqlalchemy.Column("status", sqlalchemy.Enum(UserStatus), nullable=True),
     sqlalchemy.Column('created_at', DateTime(timezone=True), nullable=True),
     sqlalchemy.Column('updated_at', DateTime(timezone=True), nullable=True)

@@ -41,3 +41,4 @@ async def after_like_menu():
         ], resize_keyboard=True
     )
     return menu
+
